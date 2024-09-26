@@ -11,7 +11,7 @@ const NavLinks = () => {
   return (
     <header className={styles.header}>
       <nav className={styles.navigation}>
-        <div className={styles.leftnav}>
+        <div>
           <Link className={`link ${pathname === '/' ? 'active' : ''}`} href="/">
             <span className={styles.logo}>Device management</span>
           </Link>

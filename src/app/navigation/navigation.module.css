@@ -6,7 +6,7 @@
 
 .navigation {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     max-width: var(--max-width);
     margin: 0 auto;
 }
@@ -18,15 +18,11 @@
     text-transform: uppercase;
 }
 
-.leftnav {
-
-}
 
 .rightnav {
     color: white;
     text-transform: uppercase;
-
-    margin: auto;
+    align-self: center;
 }
 
 .rightnav li {

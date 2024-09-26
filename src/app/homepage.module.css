@@ -1,3 +1,101 @@
 .bold {
     font-weight: 700;
 }
+
+.registerlink {
+    font-size: var(--font-size-2xl);
+    color: #0c1cff;
+    text-decoration: underline;
+}
+
+.spacing2xl > * {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+
+.maincontent {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: space-between;
+}
+
+.devicecontent {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+    border: 1px solid #D9D9D9;
+    border-radius: 1rem;
+    background-color: white;
+
+    padding: 1.5rem;
+    width: 500px;
+}
+
+.devicecontent table td {
+    height: 2.652rem;
+}
+
+.devicecontent a {
+    color: #00B2FF;
+    text-decoration: underline;
+}
+
+.devicecontent h2 {
+    margin-bottom: 1rem;
+}
+
+.searchcontent {
+    width: 500px;
+    border: 1px solid #D9D9D9;
+    border-radius: 1rem;
+    background-color: white;
+
+    padding-left: 1.5rem;
+    
+}
+
+.searchcontent > * {
+    margin-left: 1.5rem;
+}
+
+.searchform {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+.searchform > * {
+    margin-bottom: 1rem;
+}
+
+.inputs input {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    border: 1px solid #D9D9D9;
+
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.inputs input::placeholder {
+    opacity: 0.3;
+}
+
+.searchbutton {
+    font-size: var(--font-size-md);
+    color: white;
+    background-color: black;
+    border-radius: 1rem;
+    border: 1px solid #D9D9D9;
+
+    width: 100px;
+    height: 50px;
+}
+
+.terms {
+    
+}
