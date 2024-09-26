@@ -5,9 +5,8 @@ const HomePage = ()  => {
   return (
     <div className={styles.spacing2xl}>
       <h1 className={styles.bold}>Welcome to device management</h1>
+      <Link href="/register"><span className={styles.registerlink}>Register a new device</span></Link>
         <section className={`${styles.maincontent} ${styles.spacing2xl}`}>
-            <div className={styles.spacing2xl}>
-              <Link href="/register"><span className={styles.registerlink}>Register a new device</span></Link>
               <article className={styles.devicecontent}>
                 <h2>Latest devices</h2>
                 <table>
@@ -47,8 +46,7 @@ const HomePage = ()  => {
                   </tbody>
                   </table>
                 </article>
-            </div>
-
+          
             <article className={`${styles.searchcontent} ${styles.spacing2xl}`}>
               <h2 className={styles.bold}>Search devices</h2>
                 <form className={styles.searchform}>

@@ -53,3 +53,8 @@ h2 {
 h3 {
   font-size: var(--font-size-lg);
 }
+
+.active {
+  color: #00FFB2;
+  text-decoration: underline;
+}

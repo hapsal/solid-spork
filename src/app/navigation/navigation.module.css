@@ -23,6 +23,10 @@
     color: white;
     text-transform: uppercase;
     align-self: center;
+
+    display: flex;
+    
+    gap: 1rem;
 }
 
 .rightnav li {
@@ -32,3 +36,5 @@
 .rightnav a:hover {
     color: #00FFB2;
 }
+
+

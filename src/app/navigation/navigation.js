@@ -12,11 +12,19 @@ const NavLinks = () => {
     <header className={styles.header}>
       <nav className={styles.navigation}>
         <div>
-          <Link className={`link ${pathname === '/' ? 'active' : ''}`} href="/">
+          <Link className={`link ${pathname === '/'}`} href="/">
             <span className={styles.logo}>Device management</span>
           </Link>
         </div>
         <div className={styles.rightnav}>
+        <li>
+            <Link
+              className={`link ${pathname === '/' ? 'active' : ''}`}
+              href="/"
+            >
+              Home
+            </Link>
+          </li>
           <li>
             <Link
               className={`link ${pathname === '/register' ? 'active' : ''}`}
@@ -24,7 +32,15 @@ const NavLinks = () => {
             >
               Register Device
             </Link>
-          </li> 
+          </li>
+          <li>
+            <Link
+              className={`link ${pathname === '/search' ? 'active' : ''}`}
+              href="/search"
+            >
+              Advanced search
+            </Link>
+          </li>  
         </div>
       </nav>
     </header>
