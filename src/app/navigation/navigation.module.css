@@ -1,0 +1,38 @@
+.header {
+    background-color: black;
+    width: 100%;
+    
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.logo {
+    color: white;
+    font-size: var(--font-size-3xl);
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.leftnav {
+
+}
+
+.rightnav {
+    color: white;
+    text-transform: uppercase;
+
+    margin: auto;
+}
+
+.rightnav li {
+    list-style-type: none;
+}
+
+.rightnav a:hover {
+    color: #00FFB2;
+}
