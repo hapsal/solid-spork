@@ -2,6 +2,7 @@
 
 import styles from "./register.module.css";
 import { useState } from "react";
+import Link from 'next/link'
 
 import ComputerDevice from "./computer";
 import PrinterDevice from "./printer";
@@ -48,7 +49,7 @@ const RegisterPage = () => {
                             }
                         </div>
                         <div className={styles.formbuttons}>
-                            <button className={styles.backbutton}>Back</button>
+                            <button className={styles.backbutton}><Link href="/">Back</Link></button>
                             <button className={styles.registerbutton}>Register</button>
                         </div>
                     </div>
