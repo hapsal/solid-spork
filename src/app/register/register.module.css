@@ -1,0 +1,132 @@
+.registertitle {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.formsection > * {
+    margin-top: 1rem;
+}
+
+.formsection {
+    display: flex;
+    flex-direction: column;
+
+    width: 500px;
+
+    text-align: left;
+}
+
+.formsection select {
+    appearance: none;
+    background-color: transparent;
+
+    width: 300px;
+    height: 45px;
+
+    border: 1px solid #D9D9D9;
+    border-radius: 1rem;
+    background-color: white;
+    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    
+    padding: 1rem;
+}
+
+.formsection input::placeholder {
+    opacity: 0.3;
+    text-align: left;
+}
+
+.formsection input[type=text] {
+    border: 1px solid #D9D9D9;
+    border-radius: 1rem;
+    background-color: white;
+    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    width: 300px;
+    height: 45px;
+
+    padding: 1rem;
+
+}
+
+.formsection input[type=date] {
+    border: 1px solid #D9D9D9;
+    border-radius: 1rem;
+    background-color: white;
+    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    width: 300px;
+    height: 45px;
+
+    padding: 1rem;
+
+}
+
+.formsection input[type=checkbox] {
+    height: 20px;
+
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    accent-color: green;
+    cursor: pointer;
+
+    align-self: flex-start;
+}
+
+.formsection p {
+    font-size: var(--font-size-2xl);
+    font-weight: bold;
+    color: #00B2FF;
+
+    margin-bottom: 1rem;
+}
+
+.formsection textarea {
+    width: 300px;
+    height: 100px;
+
+    resize: none;
+
+    border: 1px solid #D9D9D9;
+    border-radius: 1rem;
+    background-color: white;
+    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    padding: 1rem;
+}
+
+.formsection textarea::placeholder {
+    opacity: 0.3;
+}
+
+.formbuttons {
+    display: flex;
+    justify-content: space-between;
+
+    width: 300px;
+}
+
+.backbutton {
+    font-size: var(--font-size-md);
+    color: white;
+    background-color: #FF2D34;
+    border-radius: 1rem;
+    border: 1px solid #D9D9D9;
+
+    width: 75px;
+    height: 40px;
+}
+
+.registerbutton {
+    font-size: var(--font-size-md);
+    color: white;
+    background-color: #302DFF;
+    border-radius: 1rem;
+    border: 1px solid #D9D9D9;
+
+    width: 75px;
+    height: 40px;
+}

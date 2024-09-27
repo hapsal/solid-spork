@@ -13,7 +13,7 @@ const NavLinks = () => {
       <nav className={styles.navigation}>
         <div>
           <Link className={`link ${pathname === '/'}`} href="/">
-            <span className={styles.logo}>Device management</span>
+            <span className={styles.logo}>DEMA</span>
           </Link>
         </div>
         <div className={styles.rightnav}>
