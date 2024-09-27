@@ -1,6 +1,14 @@
+"use client"
+
 import styles from "./register.module.css";
+import { useState } from "react";
+
+import ComputerDevice from "./computer";
+import PrinterDevice from "./printer";
 
 const RegisterPage = () => {
+    const [selectedDevice, setSelectedDevice] = useState("laptop")
+
     return (
         <div>
             <h1 className={styles.registertitle}>Register a new device</h1>
@@ -27,35 +35,17 @@ const RegisterPage = () => {
                     <div className={styles.formsection}>
                         <p>Device</p>
                         <label>Device type:*</label>
-                        <select name="devices" form="deviceregister">
+                        <select name="devices" form="deviceregister" value={selectedDevice} onChange={e => setSelectedDevice(e.target.value)}>
                             <option value="laptop">Laptop</option>
                             <option value="desktopcomputer">Desktop computer</option>
                             <option value="printer">Printer</option>
                         </select>
-                        {/* TODO: Inputs updates based on selection */}
                         <div className={styles.formsection}>
-                            <label>Manufacturer:*</label>
-                            <input type="text" name="manufacturer" placeholder="e.g. Lenovo"/>
-                            <label>Model:*</label>
-                            <input type="text" name="model" placeholder="e.g. IdeaPad"/>
-                            <label>MAC-Address:*</label>
-                            <input type="text" name="mac" placeholder="e.g. A1:B4:C5:C1:DD:3E"/>
-                            <label>UUID:*</label>
-                            <input type="text" name="uuid" placeholder="e.g. f81d4fae-7dec-11d0-a765-00a0c91e6bf6"/>
-                            <label>Date:</label>
-                            <input type="date" name="model" placeholder="e.g. IdeaPad"/>
-                            <label>Warranty:</label>
-                            <input type="text" name="warranty" placeholder="e.g. 3 Years"/>
-                            <label>BIOS-password:</label>
-                            <input type="text" name="biospassword" placeholder="e.g. amazingpassword"/>
-                            <label>Wake-On-LAN:</label>
-                            <input type="checkbox" name="wol" />
-                            <label>Wake-On-LAN-Omit:</label>
-                            <input type="checkbox" name="wolo" />
-                            <label>DirectAccess:</label>
-                            <input type="checkbox" name="da" />
-                            <label>Extra information:</label>
-                            <textarea form="deviceregister" name="extrainfo" placeholder="e.g. Who uses the computer" />
+                            {(selectedDevice.match("laptop") || selectedDevice.match("desktopcomputer")) ?
+                            <ComputerDevice />
+                            :
+                            <PrinterDevice />
+                            }
                         </div>
                         <div className={styles.formbuttons}>
                             <button className={styles.backbutton}>Back</button>
