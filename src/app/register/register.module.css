@@ -54,6 +54,20 @@
 
 }
 
+.formsection input[type=email] {
+    border: 1px solid #D9D9D9;
+    border-radius: 1rem;
+    background-color: white;
+    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    width: 300px;
+    height: 45px;
+
+    padding: 1rem;
+
+}
+
 .formsection input[type=date] {
     border: 1px solid #D9D9D9;
     border-radius: 1rem;
