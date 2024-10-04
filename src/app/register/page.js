@@ -47,6 +47,9 @@ const RegisterPage = () => {
             uuid: Yup.string()
                 .max(15, 'Must be 15 characters or less')
                 .required('Required'),
+            mac: Yup.string()
+                .max(15, 'Must be 15 characters or less')
+                .required('Required'),
         }),
 
         onSubmit: values => {
@@ -64,22 +67,24 @@ const RegisterPage = () => {
                         <label htmlFor="name">Name:*</label>
                         <input type="text" name="name" placeholder="e.g. John Doe" 
                          {...formik.getFieldProps('name')}
+                         className={formik.errors.name && formik.touched.name ? styles.inputerror : ''}
                         />
 
                          {formik.touched.name && formik.errors.name ? (
 
-                        <div>{formik.errors.name}</div>
+                        <div className={styles.error}>{formik.errors.name}</div>
 
                         ) : null}
 
                         <label>Email:*</label>
                         <input type="email" name="email" placeholder="e.g. john.doe@company.com"
                          {...formik.getFieldProps('email')}
+                         className={formik.errors.email && formik.touched.email ? styles.inputerror : ''}
                         />
 
                         {formik.touched.email && formik.errors.email ? (
 
-                        <div>{formik.errors.email}</div>
+                        <div className={styles.error}>{formik.errors.email}</div>
 
                         ) : null}
 
@@ -89,7 +94,7 @@ const RegisterPage = () => {
 
                         <label>Cost Center:</label>
                         <select name="costcenter" form="deviceregister"  {...formik.getFieldProps('costcenter')}>
-                            <option value="empty"></option>
+                            <option value="">Select Cost Center</option>
                             <option value="compliance">Compliance</option>
                             <option value="customerservice">Customer Service</option>
                             <option value="engineering">Engineering</option>
@@ -107,17 +112,19 @@ const RegisterPage = () => {
 
                         <label>Location:*</label>
                         <input type="text" name="location" placeholder="e.g. New York" 
-                       {...formik.getFieldProps('location')} />
+                        {...formik.getFieldProps('location')} 
+                        className={formik.errors.location && formik.touched.location ? styles.inputerror : ''}
+                        />
 
                         {formik.touched.location && formik.errors.location ? (
 
-                        <div>{formik.errors.location}</div>
+                        <div className={styles.error}>{formik.errors.location}</div>
 
                         ) : null}
 
                         <label>Home CO-Domain:*</label>
                         <select name="homedomain" form="deviceregister"  {...formik.getFieldProps('homedomain')}>
-                            <option value="empty"></option>
+                            <option value="">Select Home Domain</option>
                             <option value="complianceComputers">CO/Compliance/Computers</option>
                             <option value="compliancePrinters">CO/Compliance/Printers</option>
                             <option value="customerserviceComputers">CO/Customer Service/Computers</option>
@@ -161,49 +168,53 @@ const RegisterPage = () => {
                             {(formik.values.devicetype.match("laptop") || formik.values.devicetype.match("desktopcomputer")) ?
                             <>
                                 <label>Manufacturer:*</label>
-                                <input type="text" name="manufacturer" placeholder="e.g. Lenovo" required 
+                                <input type="text" name="manufacturer" placeholder="e.g. Lenovo"  
                                 {...formik.getFieldProps('manufacturer')}
+                                className={formik.errors.manufacturer && formik.touched.manufacturer ? styles.inputerror : ''}
                                 />
 
                                 {formik.touched.manufacturer && formik.errors.manufacturer ? (
 
-                                <div>{formik.errors.manufacturer}</div>
+                                <div className={styles.error}>{formik.errors.manufacturer}</div>
 
                                 ) : null}
 
 
                                 <label>Model:*</label>
-                                <input type="text" name="model" placeholder="e.g. IdeaPad" required
+                                <input type="text" name="model" placeholder="e.g. IdeaPad" 
                                 {...formik.getFieldProps('model')}
+                                className={formik.errors.model && formik.touched.model ? styles.inputerror : ''}
                                 />
 
                                 {formik.touched.model && formik.errors.model ? (
 
-                                <div>{formik.errors.model}</div>
+                                <div className={styles.error}>{formik.errors.model}</div>
 
                                 ) : null}
 
 
                                 <label>MAC-Address:*</label>
-                                <input type="text" name="mac" placeholder="e.g. A1:B4:C5:C1:DD:3E" required 
+                                <input type="text" name="mac" placeholder="e.g. A1:B4:C5:C1:DD:3E"  
                                 {...formik.getFieldProps('mac')}
+                                className={formik.errors.mac && formik.touched.mac ? styles.inputerror : ''}
                                 />
 
                                 {formik.touched.mac && formik.errors.mac ? (
 
-                                <div>{formik.errors.mac}</div>
+                                <div className={styles.error}>{formik.errors.mac}</div>
 
                                 ) : null}
 
 
                                 <label>UUID:*</label>
-                                <input type="text" name="uuid" placeholder="e.g. f81d4fae-7dec-11d0-a765-00a0c91e6bf6" required
+                                <input type="text" name="uuid" placeholder="e.g. f81d4fae-7dec-11d0-a765-00a0c91e6bf6" 
                                 {...formik.getFieldProps('uuid')}
+                                className={formik.errors.uuid && formik.touched.uuid ? styles.inputerror : ''}
                                 />
 
                                 {formik.touched.uuid && formik.errors.uuid ? (
 
-                                <div>{formik.errors.uuid}</div>
+                                <div className={styles.error}>{formik.errors.uuid}</div>
 
                                 ) : null}
 
@@ -243,35 +254,37 @@ const RegisterPage = () => {
                             :
                             <>
                                 <label>Manufacturer:*</label>
-                                <input type="text" name="manufacturer" placeholder="e.g. HP" required
+                                <input type="text" name="manufacturer" placeholder="e.g. HP" 
                                 {...formik.getFieldProps('manufacturer')}
+                                className={formik.errors.manufacturer && formik.touched.manufacturer ? styles.inputerror : ''}
                                 />
 
                                 {formik.touched.manufacturer && formik.errors.manufacturer ? (
 
-                                <div>{formik.errors.manufacturer}</div>
+                                <div className={styles.error}>{formik.errors.manufacturer}</div>
 
                                 ) : null}
 
                                 <label>Model:*</label>
-                                <input type="text" name="model" placeholder="e.g. LaserJet" required
+                                <input type="text" name="model" placeholder="e.g. LaserJet" 
                                 {...formik.getFieldProps('model')}
                                 />
 
                                 {formik.touched.model && formik.errors.model ? (
 
-                                <div>{formik.errors.model}</div>
+                                <div className={styles.error}>{formik.errors.model}</div>
 
                                 ) : null}
 
                                 <label>MAC-Address:*</label>
-                                <input type="text" name="mac" placeholder="e.g. A1:B4:C5:C1:DD:3E" required
+                                <input type="text" name="mac" placeholder="e.g. A1:B4:C5:C1:DD:3E" 
                                  {...formik.getFieldProps('mac')}
+                                 className={formik.errors.mac && formik.touched.mac ? styles.inputerror : ''}
                                  />
  
                                  {formik.touched.mac && formik.errors.mac ? (
  
-                                 <div>{formik.errors.mac}</div>
+                                 <div className={styles.error}>{formik.errors.mac}</div>
  
                                  ) : null}
 

@@ -147,3 +147,14 @@
     width: 75px;
     height: 40px;
 }
+
+.error {
+    color: red;
+    font-size: var(--font-size-sm);
+
+}
+
+.formsection .inputerror {
+    border: 1px solid red !important;
+    outline: none;
+}
