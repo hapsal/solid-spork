@@ -2,89 +2,122 @@
 
 import styles from "./register.module.css";
 import Link from 'next/link'
-import { useFormik } from 'formik';
+import { useState } from "react";
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup'
 
-const RegisterPage = () => {
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            email: '',
-            costcenter: '',
-            location: '',
-            homedomain: '',
-            addtodomain: '',
-            devicetype: 'laptop',
-            manufacturer: '',
-            model: '',
-            mac: '',
-            uuid: '',
-            date: '',
-            warranty: '',
-            biospass: '',
-            wol: '',
-            wolo: '',
-            da: '',
-            printqueue: '',
-            extrainfo: ''
-        },
-        validationSchema: Yup.object({
-            name: Yup.string()
-                .max(15, 'Must be 15 characters or less')
-                .required('Required'),
-            email: Yup.string()
-                .email('Invalid email address')
-                .required('Required'),
-            location: Yup.string()
-                .max(15, 'Must be 15 characters or less')
-                .required('Required'),
-            manufacturer: Yup.string()
-                .max(15, 'Must be 15 characters or less')
-                .required('Required'),
-            model: Yup.string()
-                .max(15, 'Must be 15 characters or less')
-                .required('Required'),
-            uuid: Yup.string()
-                .max(15, 'Must be 15 characters or less')
-                .required('Required'),
-            mac: Yup.string()
-                .max(15, 'Must be 15 characters or less')
-                .required('Required'),
-        }),
+const RegisterSchema =  Yup.object({
+    name: Yup.string()
+        .max(15, 'Must be 15 characters or less')
+        .required('Required'),
+    email: Yup.string()
+        .email('Invalid email address')
+        .required('Required'),
+    location: Yup.string()
+        .max(15, 'Must be 15 characters or less')
+        .required('Required'),
+    manufacturer: Yup.string()
+        .max(15, 'Must be 15 characters or less')
+        .required('Required'),
+    model: Yup.string()
+        .max(15, 'Must be 15 characters or less')
+        .required('Required'),
+    uuid: Yup.string()
+        .max(15, 'Must be 15 characters or less')
+        .required('Required'),
+    mac: Yup.string()
+        .max(15, 'Must be 15 characters or less')
+        .required('Required'),
 
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2))
+  });
+
+const RegisterPage = () => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(null)
+
+    const HandleSubmit = async (values) => {
+        setIsLoading(true)
+        setError(null) 
+
+        try {
+            const response = await fetch('/api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            });
+    
+            if (!response.ok) {
+                const errorText = await response.text()
+                throw new Error(`HTTP error! status: ${response.status}, ${errorText}`)
+            }
+    
+            const data = await response.json()
+            console.log("Response JSON OK")
+            console.log(data)
+    
+        } catch (error) {
+            setError(error.message)
+            console.error('Error during submission:', error)
+        } finally {
+            setIsLoading(false)
         }
-    })
+    }
     
     return (
         <div>
             <h1 className={styles.registertitle}>Register a new device</h1>
             <section>
-                <form onSubmit={formik.handleSubmit}> 
+                <Formik
+                initialValues = {{
+                    name: '',
+                    email: '',
+                    costcenter: '',
+                    location: '',
+                    homedomain: '',
+                    addtodomain: false,
+                    devicetype: 'laptop',
+                    manufacturer: '',
+                    model: '',
+                    mac: '',
+                    uuid: '',
+                    date: '',
+                    warranty: '',
+                    biospass: '',
+                    wol: false,
+                    wolo: false,
+                    da: false,
+                    printqueue: '',
+                    extrainfo: ''
+                }}
+                validationSchema={RegisterSchema}
+                onSubmit={HandleSubmit}
+                >
+                {({ errors, touched, values, handleChange }) => ( 
+                    <Form>
                     <div className={styles.formsection}>
                         <p>User information</p>
                         <label htmlFor="name">Name:*</label>
-                        <input type="text" name="name" placeholder="e.g. John Doe" 
-                         {...formik.getFieldProps('name')}
-                         className={formik.errors.name && formik.touched.name ? styles.inputerror : ''}
+                        <Field type="text" name="name" placeholder="e.g. John Doe" 
+              
+                         className={errors.name && touched.name ? styles.inputerror : ''}
                         />
 
-                         {formik.touched.name && formik.errors.name ? (
+                         {touched.name && errors.name ? (
 
-                        <div className={styles.error}>{formik.errors.name}</div>
+                        <div className={styles.error}>{errors.name}</div>
 
                         ) : null}
 
                         <label>Email:*</label>
-                        <input type="email" name="email" placeholder="e.g. john.doe@company.com"
-                         {...formik.getFieldProps('email')}
-                         className={formik.errors.email && formik.touched.email ? styles.inputerror : ''}
+                        <Field type="email" name="email" placeholder="e.g. john.doe@company.com"
+                         className={errors.email && touched.email ? styles.inputerror : ''}
                         />
 
-                        {formik.touched.email && formik.errors.email ? (
+                        {touched.email && errors.email ? (
 
-                        <div className={styles.error}>{formik.errors.email}</div>
+                        <div className={styles.error}>{errors.email}</div>
 
                         ) : null}
 
@@ -93,7 +126,7 @@ const RegisterPage = () => {
                         <p>Organization</p>
 
                         <label>Cost Center:</label>
-                        <select name="costcenter" form="deviceregister"  {...formik.getFieldProps('costcenter')}>
+                        <Field as="select" name="costcenter" form="deviceregister">
                             <option value="">Select Cost Center</option>
                             <option value="compliance">Compliance</option>
                             <option value="customerservice">Customer Service</option>
@@ -108,22 +141,21 @@ const RegisterPage = () => {
                             <option value="qualityassurance">Quality Assurance</option>
                             <option value="researchdevelopment">Research & Development</option>
                             <option value="riskmanagement">Risk Management</option>
-                        </select>
+                        </Field>
 
                         <label>Location:*</label>
-                        <input type="text" name="location" placeholder="e.g. New York" 
-                        {...formik.getFieldProps('location')} 
-                        className={formik.errors.location && formik.touched.location ? styles.inputerror : ''}
+                        <Field type="text" name="location" placeholder="e.g. New York" 
+                        className={errors.location && touched.location ? styles.inputerror : ''}
                         />
 
-                        {formik.touched.location && formik.errors.location ? (
+                        {touched.location && errors.location ? (
 
-                        <div className={styles.error}>{formik.errors.location}</div>
+                        <div className={styles.error}>{errors.location}</div>
 
                         ) : null}
 
                         <label>Home CO-Domain:*</label>
-                        <select name="homedomain" form="deviceregister"  {...formik.getFieldProps('homedomain')}>
+                        <Field as="select" name="homedomain" form="deviceregister">
                             <option value="">Select Home Domain</option>
                             <option value="complianceComputers">CO/Compliance/Computers</option>
                             <option value="compliancePrinters">CO/Compliance/Printers</option>
@@ -151,175 +183,170 @@ const RegisterPage = () => {
                             <option value="researchdevelopmentPrinters">CO/Research & Development/Printers</option>
                             <option value="riskmanagementComputers">CO/Risk Management/Computers</option>
                             <option value="riskmanagementPrinters">CO/Risk Management/Printers</option>
-                        </select>
+                        </Field>
 
                         <label>Add to CO-Domain:</label>
-                        <input type="checkbox" name="addtodomain" value={formik.values.addtodomain} onChange={formik.handleChange}/>
+                        <Field type="checkbox" name="addtodomain" />
                     </div>
                     <div className={styles.formsection}>
                         <p>Device</p>
                         <label>Device type:*</label>
-                        <select name="devicetype" form="deviceregister" value={formik.values.devicetype} onChange={formik.handleChange}>
+                        <Field as="select" name="devicetype" form="deviceregister" value={values.devicetype} onChange={handleChange}>
                             <option value="laptop">Laptop</option>
                             <option value="desktopcomputer">Desktop computer</option>
                             <option value="printer">Printer</option>
-                        </select>
+                        </Field>
                         <div className={styles.formsection}>
-                            {(formik.values.devicetype.match("laptop") || formik.values.devicetype.match("desktopcomputer")) ?
+                            {(values.devicetype.match("laptop") || values.devicetype.match("desktopcomputer")) ?
                             <>
                                 <label>Manufacturer:*</label>
-                                <input type="text" name="manufacturer" placeholder="e.g. Lenovo"  
-                                {...formik.getFieldProps('manufacturer')}
-                                className={formik.errors.manufacturer && formik.touched.manufacturer ? styles.inputerror : ''}
+                                <Field type="text" name="manufacturer" placeholder="e.g. Lenovo"  
+                                className={errors.manufacturer && touched.manufacturer ? styles.inputerror : ''}
                                 />
 
-                                {formik.touched.manufacturer && formik.errors.manufacturer ? (
+                                {touched.manufacturer && errors.manufacturer ? (
 
-                                <div className={styles.error}>{formik.errors.manufacturer}</div>
+                                <div className={styles.error}>{errors.manufacturer}</div>
 
                                 ) : null}
 
 
                                 <label>Model:*</label>
-                                <input type="text" name="model" placeholder="e.g. IdeaPad" 
-                                {...formik.getFieldProps('model')}
-                                className={formik.errors.model && formik.touched.model ? styles.inputerror : ''}
+                                <Field type="text" name="model" placeholder="e.g. IdeaPad" 
+                                className={errors.model && touched.model ? styles.inputerror : ''}
                                 />
 
-                                {formik.touched.model && formik.errors.model ? (
+                                {touched.model && errors.model ? (
 
-                                <div className={styles.error}>{formik.errors.model}</div>
+                                <div className={styles.error}>{errors.model}</div>
 
                                 ) : null}
 
 
                                 <label>MAC-Address:*</label>
-                                <input type="text" name="mac" placeholder="e.g. A1:B4:C5:C1:DD:3E"  
-                                {...formik.getFieldProps('mac')}
-                                className={formik.errors.mac && formik.touched.mac ? styles.inputerror : ''}
+                                <Field type="text" name="mac" placeholder="e.g. A1:B4:C5:C1:DD:3E"  
+                                className={errors.mac && touched.mac ? styles.inputerror : ''}
                                 />
 
-                                {formik.touched.mac && formik.errors.mac ? (
+                                {touched.mac && errors.mac ? (
 
-                                <div className={styles.error}>{formik.errors.mac}</div>
+                                <div className={styles.error}>{errors.mac}</div>
 
                                 ) : null}
 
 
                                 <label>UUID:*</label>
-                                <input type="text" name="uuid" placeholder="e.g. f81d4fae-7dec-11d0-a765-00a0c91e6bf6" 
-                                {...formik.getFieldProps('uuid')}
-                                className={formik.errors.uuid && formik.touched.uuid ? styles.inputerror : ''}
+                                <Field type="text" name="uuid" placeholder="e.g. f81d4fae-7dec-11d0-a765-00a0c91e6bf6" 
+                                className={errors.uuid && touched.uuid ? styles.inputerror : ''}
                                 />
 
-                                {formik.touched.uuid && formik.errors.uuid ? (
+                                {touched.uuid && errors.uuid ? (
 
-                                <div className={styles.error}>{formik.errors.uuid}</div>
+                                <div className={styles.error}>{errors.uuid}</div>
 
                                 ) : null}
 
 
                                 <label>Date:</label>
-                                <input type="date" name="date" 
-                                value={formik.values.date} onChange={formik.handleChange} />
+                                <Field type="date" name="date" 
+                                value={values.date} onChange={handleChange} />
 
                                 <label>Warranty:</label>
-                                <input type="text" name="warranty" placeholder="e.g. 3 Years"
-                                value={formik.values.warranty} onChange={formik.handleChange} />
+                                <Field type="text" name="warranty" placeholder="e.g. 3 Years"
+                                value={values.warranty} onChange={handleChange} />
 
                                 <label>BIOS-password:</label>
-                                <input type="text" name="biospass" placeholder="e.g. amazingpassword"
-                                value={formik.values.biospass} onChange={formik.handleChange}
+                                <Field type="text" name="biospass" placeholder="e.g. amazingpassword"
+                                value={values.biospass} onChange={handleChange}
                                 />
 
                                 <label>Wake-On-LAN:</label>
-                                <input type="checkbox" name="wol" 
-                                value={formik.values.wol} onChange={formik.handleChange}
+                                <Field type="checkbox" name="wol" 
+        
                                 />
 
                                 <label>Wake-On-LAN-Omit:</label>
-                                <input type="checkbox" name="wolo" 
-                                value={formik.values.wolo} onChange={formik.handleChange}
+                                <Field type="checkbox" name="wolo" 
+  
                                 />
 
                                 <label>DirectAccess:</label>
-                                <input type="checkbox" name="da" 
-                                value={formik.values.da} onChange={formik.handleChange} />
+                                <Field type="checkbox" name="da" 
+                                 />
 
                                 <label>Extra information:</label>
-                                <textarea form="deviceregister" name="extrainfo" placeholder="e.g. Who uses the computer" 
-                                value={formik.values.extrainfo} onChange={formik.handleChange}
+                                <Field as="textarea" form="deviceregister" name="extrainfo" placeholder="e.g. Who uses the computer" 
+                                value={values.extrainfo} onChange={handleChange}
                                 />
                             </>
                             :
                             <>
                                 <label>Manufacturer:*</label>
-                                <input type="text" name="manufacturer" placeholder="e.g. HP" 
-                                {...formik.getFieldProps('manufacturer')}
-                                className={formik.errors.manufacturer && formik.touched.manufacturer ? styles.inputerror : ''}
+                                <Field type="text" name="manufacturer" placeholder="e.g. HP" 
+                                className={errors.manufacturer && touched.manufacturer ? styles.inputerror : ''}
                                 />
 
-                                {formik.touched.manufacturer && formik.errors.manufacturer ? (
+                                {touched.manufacturer && errors.manufacturer ? (
 
-                                <div className={styles.error}>{formik.errors.manufacturer}</div>
+                                <div className={styles.error}>{errors.manufacturer}</div>
 
                                 ) : null}
 
                                 <label>Model:*</label>
-                                <input type="text" name="model" placeholder="e.g. LaserJet" 
-                                {...formik.getFieldProps('model')}
+                                <Field type="text" name="model" placeholder="e.g. LaserJet" 
                                 />
 
-                                {formik.touched.model && formik.errors.model ? (
+                                {touched.model && errors.model ? (
 
-                                <div className={styles.error}>{formik.errors.model}</div>
+                                <div className={styles.error}>{errors.model}</div>
 
                                 ) : null}
 
                                 <label>MAC-Address:*</label>
-                                <input type="text" name="mac" placeholder="e.g. A1:B4:C5:C1:DD:3E" 
-                                 {...formik.getFieldProps('mac')}
-                                 className={formik.errors.mac && formik.touched.mac ? styles.inputerror : ''}
+                                <Field type="text" name="mac" placeholder="e.g. A1:B4:C5:C1:DD:3E" 
+                                 className={errors.mac && touched.mac ? styles.inputerror : ''}
                                  />
  
-                                 {formik.touched.mac && formik.errors.mac ? (
+                                 {touched.mac && errors.mac ? (
  
-                                 <div className={styles.error}>{formik.errors.mac}</div>
+                                 <div className={styles.error}>{errors.mac}</div>
  
                                  ) : null}
 
                                 <label>Date:</label>
-                                <input type="date" name="date" 
-                                 value={formik.values.date} onChange={formik.handleChange}
+                                <Field type="date" name="date" 
+                                 value={values.date} onChange={handleChange}
                                 />
 
                                 <label>Warranty:</label>
-                                <input type="text" name="warranty" placeholder="e.g. 3 Years"
-                                 value={formik.values.warranty} onChange={formik.handleChange}
+                                <Field type="text" name="warranty" placeholder="e.g. 3 Years"
+                                 value={values.warranty} onChange={handleChange}
                                 />
 
                                 <label>Purpose of the printer:</label>
-                                <label>Public printer: <input type="radio" name="public" checked="checked" /></label>
-                                <label>Private printer: <input type="radio" name="private" /></label>
+                                <label>Public printer: <Field type="radio" name="public" value="public" /></label>
+                                <label>Private printer: <Field type="radio" name="private" value="private" /></label>
 
                                 <label>Print queue name:</label>
-                                <input type="text" name="queue" placeholder="e.g. \\print.co.com\printer_name" 
-                                value={formik.values.printqueue} onChange={formik.handleChange}
+                                <Field type="text" name="queue" placeholder="e.g. \\print.co.com\printer_name" 
+                                value={values.printqueue} onChange={handleChange}
                                 />
                                 
-                                <lavel>Extra information: </lavel>
-                                <textarea form="deviceregister" name="extrainfo" placeholder="e.g. Where is the printer located" 
-                                value={formik.values.extrainfo} onChange={formik.handleChange}
+                                <label>Extra information: </label>
+                                <Field as="textarea" form="deviceregister" name="extrainfo" placeholder="e.g. Where is the printer located" 
+                                value={values.extrainfo} onChange={handleChange}
                                 />
                             </>
                             }
                         </div>
                         <div className={styles.formbuttons}>
                             <button className={styles.backbutton}><Link href="/">Back</Link></button>
-                            <button className={styles.registerbutton} type="submit">Register</button>
+                            <button className={styles.registerbutton} type="submit" disabled={isLoading}>{isLoading ? 'Loading...' : 'Register'}</button>
                         </div>
                     </div>
-                </form>
+                    </Form>
+                    )}
+                </Formik>
             </section>
         </div>
     )
