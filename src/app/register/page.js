@@ -23,22 +23,20 @@ const RegisterSchema =  Yup.object({
         .max(15, 'Must be 15 characters or less')
         .required('Required'),
     uuid: Yup.string()
-        .max(15, 'Must be 15 characters or less')
+        .max(50, 'Must be 50 characters or less')
         .required('Required'),
     mac: Yup.string()
-        .max(15, 'Must be 15 characters or less')
+        .max(25, 'Must be 25 characters or less')
         .required('Required'),
 
   })
 
 const RegisterPage = () => {
     const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
     const [formdata, setFormData] = useState('')
 
-    const HandleSubmit = async (formData) => {
+    const HandleSubmit = async (formData, { setErrors, resetForm }) => {
         setIsLoading(true)
-        setError(null) 
 
         try {
             const response = await fetch('/api/register-form', {
@@ -47,20 +45,25 @@ const RegisterPage = () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
-            });
-    
+            })
+
             if (!response.ok) {
-                const errorText = await response.text()
-                throw new Error(`HTTP error! status: ${response.status}, ${errorText}`)
+                const errorData = await response.json();
+                
+                if (errorData.errors) {
+                    setErrors(errorData.errors)
+                } else {
+                    throw new Error(errorData.message || `HTTP error! status: ${response.status}`)
+                }
+
+                return;
             }
-    
+
             const data = await response.json()
-            //console.log("Response JSON OK")
             //console.log(data)
             setFormData(data)
-    
+            resetForm()
         } catch (error) {
-            setError(error.message)
             console.error('Error during submission:', error)
         } finally {
             setIsLoading(false)
