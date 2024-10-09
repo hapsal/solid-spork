@@ -26,7 +26,7 @@ export async function POST(req, { params }) {
             if (error instanceof z.ZodError) {
                 const fieldErrors = error.errors.reduce((acc, err) => {
                     acc[err.path[0]] = err.message
-                    return acc;
+                    return acc
                 }, {})
 
                 return new Response(JSON.stringify({ errors: fieldErrors }), { status: 400 })
