@@ -29,23 +29,24 @@ const RegisterSchema =  Yup.object({
         .max(15, 'Must be 15 characters or less')
         .required('Required'),
 
-  });
+  })
 
 const RegisterPage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
+    const [formdata, setFormData] = useState('')
 
-    const HandleSubmit = async (values) => {
+    const HandleSubmit = async (formData) => {
         setIsLoading(true)
         setError(null) 
 
         try {
-            const response = await fetch('/api', {
+            const response = await fetch('/api/register-form', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(values)
+                body: JSON.stringify(formData)
             });
     
             if (!response.ok) {
@@ -54,8 +55,9 @@ const RegisterPage = () => {
             }
     
             const data = await response.json()
-            console.log("Response JSON OK")
-            console.log(data)
+            //console.log("Response JSON OK")
+            //console.log(data)
+            setFormData(data)
     
         } catch (error) {
             setError(error.message)
@@ -68,6 +70,7 @@ const RegisterPage = () => {
     return (
         <div>
             <h1 className={styles.registertitle}>Register a new device</h1>
+            <h2 className={styles.success}>{formdata.message}</h2>
             <section>
                 <Formik
                 initialValues = {{
