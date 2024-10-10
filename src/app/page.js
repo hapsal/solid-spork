@@ -1,7 +1,23 @@
+"use client"
+
 import styles from "./homepage.module.css";
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 const HomePage = ()  => {
+  const [devices, setDevices] = useState([])
+
+  useEffect(() => {
+    async function fetchDevices() {
+      const response = await fetch('/api/devicelist')
+      const data = await response.json()
+
+      setDevices(data)
+    }
+
+    fetchDevices()
+  }, [])
+
   return (
     <div className={styles.spacing2xl}>
       <h1 className={styles.bold}>Welcome to device management</h1>
@@ -18,32 +34,20 @@ const HomePage = ()  => {
                     </tr>
                   </thead>
                   <tbody>
+                  {devices.length > 0 ? (
+                    devices.map((device) => (
+                      <tr key={device._id}>
+                        <td><Link href="#">{device.deviceName}</Link></td>
+                        <td>{device.name}</td>
+                        <td>{new Date(device.entryDate).toLocaleDateString()}</td>
+                      </tr>
+                    ))
+                  ) : (
                     <tr>
-                      <td><Link href="#">CO-123456</Link></td>
-                      <td>John Doe</td>
-                      <td>5.6.2023</td>
+                      <td colSpan="3">No devices found</td>
                     </tr>
-                    <tr>
-                      <td><Link href="#">CO-123456</Link></td>
-                      <td>John Doe</td>
-                      <td>5.6.2023</td>
-                    </tr>
-                    <tr>
-                      <td><Link href="#">CO-123456</Link></td>
-                      <td>John Doe</td>
-                      <td>5.6.2023</td>
-                    </tr>
-                    <tr>
-                      <td><Link href="#">CO-123456</Link></td>
-                      <td>John Doe</td>
-                      <td>5.6.2023</td>
-                    </tr>
-                    <tr>
-                      <td><Link href="#">CO-123456</Link></td>
-                      <td>John Doe</td>
-                      <td>5.6.2023</td>
-                    </tr>
-                  </tbody>
+                  )}
+                </tbody>
                   </table>
                 </article>
           

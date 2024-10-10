@@ -48,7 +48,7 @@ async function generateDeviceName(collection) {
     const deviceName = orgInitials +
         Number(String(newDate.getFullYear()).slice(2)) +
         String(newDate.getMonth() + 1).padStart(2, '0') +
-        String(newIncrement).padStart(3, '0')
+        String(newIncrement).padStart(2, '0')
 
     return deviceName
 }
@@ -116,4 +116,30 @@ export async function POST(req, { params }) {
         }
     }
     return new Response(JSON.stringify({ message: "Endpoint not found" }), { status: 404 })
+}
+
+export async function GET(res, { params }) {
+    const slug = params.slug
+
+    if (slug === 'devicelist') {
+        try {
+            const { client, db } = await connectToDatabase()
+            const collection = db.collection('registered-devices')
+    
+            const devices = await collection.find().sort({ entryDate: -1 }).limit(10).toArray()
+    
+            await client.close()
+    
+            return new Response(JSON.stringify(devices), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            })
+        } catch (error) {
+            console.error('Database error:', error)
+            return new Response(JSON.stringify({ message: 'Failed to retrieve devices' }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            })
+        }
+    }
 }
