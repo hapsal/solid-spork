@@ -17,7 +17,6 @@ const HomePage = ()  => {
 
     fetchDevices()
   }, [])
-
   return (
     <div className={styles.spacing2xl}>
       <h1 className={styles.bold}>Welcome to device management</h1>
@@ -37,14 +36,14 @@ const HomePage = ()  => {
                   {devices.length > 0 ? (
                     devices.map((device) => (
                       <tr key={device._id}>
-                        <td><Link href="#">{device.deviceName}</Link></td>
+                        <td><Link href={`/device/${device._id}`}>{device.deviceName}</Link></td>
                         <td>{device.name}</td>
                         <td>{new Date(device.entryDate).toLocaleDateString()}</td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="3">No devices found</td>
+                      <td>Loading</td>
                     </tr>
                   )}
                 </tbody>
