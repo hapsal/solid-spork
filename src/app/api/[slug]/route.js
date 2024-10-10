@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { isMACAddress, isUUID } from 'validator'
+import { MongoClient } from 'mongodb'
 
 const schema = z.object({
     mac: z.string().refine(
@@ -12,6 +13,46 @@ const schema = z.object({
     )
 })
 
+async function connectToDatabase() {
+    const client = new MongoClient(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    await client.connect()
+    return { client, db: client.db('register-form') }
+}
+
+async function getLastDeviceName(collection) {
+    const lastDevice = await collection
+        .find({})
+        .sort({ entryDate: -1 })
+        .limit(1)
+        .toArray()
+
+    return lastDevice.length ? lastDevice[0].deviceName : null
+}
+
+async function generateDeviceName(collection) {
+    const newDate = new Date()
+    const orgInitials = "CO-"
+
+    const lastDeviceName = await getLastDeviceName(collection)
+
+    let lastIncrement = 0
+    if (lastDeviceName) {
+        lastIncrement = parseInt(lastDeviceName.slice(-3), 10)
+    }
+
+    const newIncrement = lastIncrement + 1
+
+    const deviceName = orgInitials +
+        Number(String(newDate.getFullYear()).slice(2)) +
+        String(newDate.getMonth() + 1).padStart(2, '0') +
+        String(newIncrement).padStart(3, '0')
+
+    return deviceName
+}
+
 export async function POST(req, { params }) {
     const slug = params.slug
 
@@ -19,9 +60,47 @@ export async function POST(req, { params }) {
         try {
             const data = await req.json()
 
-            schema.parse(data)
+            schema.parse(data);
 
-            return new Response(JSON.stringify({ message: "Device registered!" }), { status: 200 })
+            const { client, db } = await connectToDatabase()
+            const collection = db.collection('registered-devices')
+
+            try {
+                const deviceName = await generateDeviceName(collection)
+                
+                const rawRegisterData = {
+                    deviceName: deviceName,
+                    name: data.name,
+                    email: data.email,
+                    costcenter: data.costcenter,
+                    location: data.location,
+                    homedomain: data.homedomain,
+                    addtodomain: data.addtodomain,
+                    devicetype: data.devicetype,
+                    manufacturer: data.manufacturer,
+                    model: data.model,
+                    mac: data.mac,
+                    uuid: data.uuid,
+                    date: data.date,
+                    warranty: data.warranty,
+                    biospass: data.biospass,
+                    wol: data.wol,
+                    wolo: data.wolo,
+                    da: data.da,
+                    printqueue: data.printqueue,
+                    extrainfo: data.extrainfo,
+                    entryDate: new Date()
+                }
+
+                await collection.insertOne(rawRegisterData)
+
+                return new Response(JSON.stringify({ message: "Device registered successfully!", deviceName }), { status: 201 })
+            } catch (error) {
+                console.error('Database error:', error)
+                return new Response(JSON.stringify({ message: "Database error occurred!" }), { status: 500 })
+            } finally {
+                await client.close()
+            }
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const fieldErrors = error.errors.reduce((acc, err) => {
@@ -32,9 +111,9 @@ export async function POST(req, { params }) {
                 return new Response(JSON.stringify({ errors: fieldErrors }), { status: 400 })
             }
 
-            return new Response(JSON.stringify({ message: "An unexpected error occurred" }), { status: 500 })
+            console.error('Unexpected error:', error)
+            return new Response(JSON.stringify({ message: "Unexpected server error!" }), { status: 500 })
         }
     }
-
     return new Response(JSON.stringify({ message: "Endpoint not found" }), { status: 404 })
 }

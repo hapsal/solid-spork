@@ -68,6 +68,8 @@ const RegisterPage = () => {
         } finally {
             setIsLoading(false)
         }
+
+
     }
     
     return (
