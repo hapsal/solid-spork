@@ -28,7 +28,6 @@ const RegisterSchema =  Yup.object({
     mac: Yup.string()
         .max(25, 'Must be 25 characters or less')
         .required('Required'),
-
   })
 
 const RegisterPage = () => {
@@ -84,8 +83,8 @@ const RegisterPage = () => {
                     costcenter: '',
                     location: '',
                     homedomain: '',
-                    addtodomain: false,
-                    devicetype: 'laptop',
+                    addtodomain: '',
+                    devicetype: '',
                     manufacturer: '',
                     model: '',
                     mac: '',
@@ -93,9 +92,10 @@ const RegisterPage = () => {
                     date: '',
                     warranty: '',
                     biospass: '',
-                    wol: false,
-                    wolo: false,
-                    da: false,
+                    wol: '',
+                    wolo: '',
+                    da: '',
+                    printerpurpose: '',
                     printqueue: '',
                     extrainfo: ''
                 }}
@@ -136,19 +136,19 @@ const RegisterPage = () => {
                         <label>Cost Center:</label>
                         <Field as="select" name="costcenter" form="deviceregister">
                             <option value="">Select Cost Center</option>
-                            <option value="compliance">Compliance</option>
-                            <option value="customerservice">Customer Service</option>
-                            <option value="engineering">Engineering</option>
-                            <option value="facilities">Facilities Management</option>
-                            <option value="financeaccounting">Finance & Accounting</option>
-                            <option value="humanresources">Human Resources</option>
-                            <option value="informationtechnology">Information Technology</option>
-                            <option value="legaldepartment">Legal Department</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="procurement">Procurement</option>
-                            <option value="qualityassurance">Quality Assurance</option>
-                            <option value="researchdevelopment">Research & Development</option>
-                            <option value="riskmanagement">Risk Management</option>
+                            <option value="Compliance">Compliance</option>
+                            <option value="Customer Service">Customer Service</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Facilities Management">Facilities Management</option>
+                            <option value="Finance and Accounting">Finance & Accounting</option>
+                            <option value="Human Resources">Human Resources</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Legal Department">Legal Department</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Procurement">Procurement</option>
+                            <option value="Quality Assurance">Quality Assurance</option>
+                            <option value="Research and Development">Research & Development</option>
+                            <option value="Risk Management">Risk Management</option>
                         </Field>
 
                         <label>Location:*</label>
@@ -165,32 +165,32 @@ const RegisterPage = () => {
                         <label>Home CO-Domain:*</label>
                         <Field as="select" name="homedomain" form="deviceregister">
                             <option value="">Select Home Domain</option>
-                            <option value="complianceComputers">CO/Compliance/Computers</option>
-                            <option value="compliancePrinters">CO/Compliance/Printers</option>
-                            <option value="customerserviceComputers">CO/Customer Service/Computers</option>
-                            <option value="customerservicePrinters">CO/Customer Service/Printers</option>
-                            <option value="engineeringComputers">CO/Engineering/Computers</option>
-                            <option value="engineeringPrinters">CO/Engineering/Printers</option>
-                            <option value="facilitiesComputers">CO/Facilities Management/Computers</option>
-                            <option value="facilitiesPrinters">CO/Facilities Management/Printers</option>
-                            <option value="financeaccountingComputers">CO/Finance & Accounting/Computers</option>
-                            <option value="financeaccountingPrinters">CO/Finance & Accounting/Printers</option>
-                            <option value="humanresourcesComputers">CO/Human Resources/Computers</option>
-                            <option value="humanresourcesPrinters">CO/Human Resources/Printers</option>
-                            <option value="informationtechnologyComputers">CO/Information Technology/Computers</option>
-                            <option value="informationtechnologPrinters">CO/Information Technology/Printers</option>
-                            <option value="legaldepartmentComputers">CO/Legal Department/Computers</option>
-                            <option value="legaldepartmentPrinters">CO/Legal Department/Printers</option>
-                            <option value="marketingComputers">CO/Marketing/Computers</option>
-                            <option value="marketingPrinters">CO/Marketing/Printers</option>
-                            <option value="procurementComputers">CO/Procurement/Computers</option>
-                            <option value="procurementPrinters">CO/Procurement/Printers</option>
-                            <option value="qualityassuranceComputers">CO/Quality Assurance/Computers</option>
-                            <option value="qualityassurancePrinters">CO/Quality Assurance/Printers</option>
-                            <option value="researchdevelopmentComputers">CO/Research & Development/Computers</option>
-                            <option value="researchdevelopmentPrinters">CO/Research & Development/Printers</option>
-                            <option value="riskmanagementComputers">CO/Risk Management/Computers</option>
-                            <option value="riskmanagementPrinters">CO/Risk Management/Printers</option>
+                            <option value="CO/Compliance/Computers">CO/Compliance/Computers</option>
+                            <option value="CO/Compliance/Printers">CO/Compliance/Printers</option>
+                            <option value="CO/Customerservice/Computers">CO/Customer Service/Computers</option>
+                            <option value="CO/Customerservice/Printers">CO/Customer Service/Printers</option>
+                            <option value="CO/Engineering/Computers">CO/Engineering/Computers</option>
+                            <option value="CO/Engineering/Printers">CO/Engineering/Printers</option>
+                            <option value="CO/Facilities/Computers">CO/Facilities Management/Computers</option>
+                            <option value="CO/Facilities/Printers">CO/Facilities Management/Printers</option>
+                            <option value="CO/Financeaccounting/Computers">CO/Finance & Accounting/Computers</option>
+                            <option value="CO/Financeaccounting/Printers">CO/Finance & Accounting/Printers</option>
+                            <option value="CO/Humanresources/Computers">CO/Human Resources/Computers</option>
+                            <option value="CO/Humanresources/Printers">CO/Human Resources/Printers</option>
+                            <option value="CO/Informationtechnology/Computers">CO/Information Technology/Computers</option>
+                            <option value="CO/Informationtechnolog/Printers">CO/Information Technology/Printers</option>
+                            <option value="CO/Legaldepartment/Computers">CO/Legal Department/Computers</option>
+                            <option value="CO/Legaldepartment/Printers">CO/Legal Department/Printers</option>
+                            <option value="CO/Marketing/Computers">CO/Marketing/Computers</option>
+                            <option value="CO/Marketing/Printers">CO/Marketing/Printers</option>
+                            <option value="CO/Procurement/Computers">CO/Procurement/Computers</option>
+                            <option value="CO/Procurement/Printers">CO/Procurement/Printers</option>
+                            <option value="CO/Qualityassurance/Computers">CO/Quality Assurance/Computers</option>
+                            <option value="CO/Qualityassurance/Printers">CO/Quality Assurance/Printers</option>
+                            <option value="CO/Researchdevelopment/Computers">CO/Research & Development/Computers</option>
+                            <option value="CO/Fesearchdevelopment/Printers">CO/Research & Development/Printers</option>
+                            <option value="CO/Riskmanagement/Computers">CO/Risk Management/Computers</option>
+                            <option value="CO/Riskmanagement/Printers">CO/Risk Management/Printers</option>
                         </Field>
 
                         <label>Add to CO-Domain:</label>
@@ -200,12 +200,13 @@ const RegisterPage = () => {
                         <p>Device</p>
                         <label>Device type:*</label>
                         <Field as="select" name="devicetype" form="deviceregister" value={values.devicetype} onChange={handleChange}>
-                            <option value="laptop">Laptop</option>
-                            <option value="desktopcomputer">Desktop computer</option>
-                            <option value="printer">Printer</option>
+                            <option value="">Select Device type</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Desktop Computer">Desktop Computer</option>
+                            <option value="Printer">Printer</option>
                         </Field>
                         <div className={styles.formsection}>
-                            {(values.devicetype.match("laptop") || values.devicetype.match("desktopcomputer")) ?
+                            {(values.devicetype.match("Laptop") || values.devicetype.match("Desktop Computer")) && (
                             <>
                                 <label>Manufacturer:*</label>
                                 <Field type="text" name="manufacturer" placeholder="e.g. Lenovo"  
@@ -260,8 +261,13 @@ const RegisterPage = () => {
                                 value={values.date} onChange={handleChange} />
 
                                 <label>Warranty:</label>
-                                <Field type="text" name="warranty" placeholder="e.g. 3 Years"
-                                value={values.warranty} onChange={handleChange} />
+                                <Field as="select" name="warranty" form="deviceregister" value={values.warranty} onChange={handleChange}>
+                                    <option value="No warranty">No warranty</option>
+                                    <option value="1">1 year</option>
+                                    <option value="2">2 year</option>
+                                    <option value="3">3 year</option>
+                                    <option value="3">4 year</option>
+                                </Field>
 
                                 <label>BIOS-password:</label>
                                 <Field type="text" name="biospass" placeholder="e.g. amazingpassword"
@@ -287,7 +293,8 @@ const RegisterPage = () => {
                                 value={values.extrainfo} onChange={handleChange}
                                 />
                             </>
-                            :
+                            )}
+                            {values.devicetype === 'Printer' && (
                             <>
                                 <label>Manufacturer:*</label>
                                 <Field type="text" name="manufacturer" placeholder="e.g. HP" 
@@ -327,16 +334,20 @@ const RegisterPage = () => {
                                 />
 
                                 <label>Warranty:</label>
-                                <Field type="text" name="warranty" placeholder="e.g. 3 Years"
-                                 value={values.warranty} onChange={handleChange}
-                                />
+                                <Field as="select" name="warranty" form="deviceregister" value={values.warranty} onChange={handleChange}>
+                                    <option value="No warranty">No warranty</option>
+                                    <option value="1">1 year</option>
+                                    <option value="2">2 year</option>
+                                    <option value="3">3 year</option>
+                                    <option value="3">4 year</option>
+                                </Field>
 
                                 <label>Purpose of the printer:</label>
-                                <label>Public printer: <Field type="radio" name="public" value="public" /></label>
-                                <label>Private printer: <Field type="radio" name="private" value="private" /></label>
+                                <label>Public printer: <Field type="radio" name="printerpurpose" value="public" /></label>
+                                <label>Private printer: <Field type="radio" name="printerpurpose" value="private" /></label>
 
                                 <label>Print queue name:</label>
-                                <Field type="text" name="queue" placeholder="e.g. \\print.co.com\printer_name" 
+                                <Field type="text" name="printqueue" placeholder="e.g. \\print.co.com\printer_name" 
                                 value={values.printqueue} onChange={handleChange}
                                 />
                                 
@@ -345,7 +356,7 @@ const RegisterPage = () => {
                                 value={values.extrainfo} onChange={handleChange}
                                 />
                             </>
-                            }
+                            )}
                         </div>
                         <div className={styles.formbuttons}>
                             <button className={styles.backbutton}><Link href="/">Back</Link></button>

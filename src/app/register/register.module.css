@@ -95,7 +95,7 @@
 .formsection p {
     font-size: var(--font-size-2xl);
     font-weight: bold;
-    color: #00B2FF;
+    color: var(--font-color-blue);
 
     margin-bottom: 1rem;
 }
