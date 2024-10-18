@@ -94,8 +94,8 @@ const HomePage = ()  => {
                           <th>Type</th>
                         </tr>
                       </thead>
-                      {filteredDevice.map(device =>
                       <tbody>
+                      {filteredDevice.map(device =>
                         <tr key={device._id}>
                           <th>
                             <Link href={`/device/${device._id}`}>{device.deviceName}</Link>
@@ -107,8 +107,8 @@ const HomePage = ()  => {
                             {device.devicetype}
                           </th>
                         </tr>
-                      </tbody> 
                       )}
+                      </tbody> 
                     </table>
                 }
               </div> 
