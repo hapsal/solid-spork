@@ -103,6 +103,39 @@
     height: 50px;
 }
 
+.searchresult {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.searchresult table {
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    font-size: var(--font-size-sm);
+}
+
+.searchresult th {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+
+}
+
+.searchresult tbody   {
+  background-color: #757575;
+  color: white;
+}
+
+.searchresult thead   {
+    background-color: #757575;
+    color: white;
+  }
+
+.searchresult a {
+    color: #57cdff;
+    text-decoration: underline;
+}
+
 .terms {
     
 }
