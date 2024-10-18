@@ -81,6 +81,7 @@ export async function POST(req, { params }) {
                     model: data.model,
                     mac: data.mac,
                     uuid: data.uuid,
+                    serviceid: data.serviceid,
                     date: data.date,
                     warranty: data.warranty,
                     biospass: data.biospass,

@@ -78,6 +78,7 @@ export default async function Device({ params }) {
                     <p>Model: <label>{device.model}</label></p>
                     <p>MAC-Address: <label>{device.mac}</label></p>
                     <p>UUID: <label>{device.uuid}</label></p>
+                    <p>Service ID: <label>{device.serviceid}</label></p>
                     <p>Registered on: <label>{new Date(device.entryDate).toLocaleDateString()}</label></p>
                     <p>Warranty Expiry: <label>{device.entryDate ? new Date(new Date(device.entryDate).setFullYear(new Date(device.entryDate).getFullYear() + 3)).toLocaleDateString() : "Not set"}</label></p>
                     <p>BIOS-password: <label>{device.biospass ? device.biospass : "Not set"}</label></p>

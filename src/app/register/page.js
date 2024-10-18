@@ -89,6 +89,7 @@ const RegisterPage = () => {
                     model: '',
                     mac: '',
                     uuid: '',
+                    serviceid: '',
                     date: '',
                     warranty: '',
                     biospass: '',
@@ -252,6 +253,17 @@ const RegisterPage = () => {
                                 {touched.uuid && errors.uuid ? (
 
                                 <div className={styles.error}>{errors.uuid}</div>
+
+                                ) : null}
+
+                                <label>Service ID:*</label>
+                                <Field type="text" name="serviceid" placeholder="e.g. 12A3B45" 
+                                className={errors.serviceid && touched.serviceid ? styles.inputerror : ''}
+                                />
+
+                                {touched.serviceid && errors.serviceid ? (
+
+                                <div className={styles.error}>{errors.serviceid}</div>
 
                                 ) : null}
 

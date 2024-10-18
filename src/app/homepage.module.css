@@ -113,6 +113,8 @@
     border-collapse: collapse;
     border: 2px solid rgb(140 140 140);
     font-size: var(--font-size-sm);
+
+    width: 450px;
 }
 
 .searchresult th {

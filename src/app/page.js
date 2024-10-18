@@ -101,7 +101,7 @@ const HomePage = ()  => {
                             <Link href={`/device/${device._id}`}>{device.deviceName}</Link>
                           </th>
                           <th>
-                            {device._id}
+                            {device.serviceid}
                           </th>
                           <th>
                             {device.devicetype}
