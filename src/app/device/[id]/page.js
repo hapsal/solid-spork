@@ -49,7 +49,7 @@ export async function getStaticPaths() {
 export default async function Device({ params }) {
     const device = await getDeviceById(params.id)
 
-    //console.log(device)
+    console.log(device)
 
     if (!device) {
         return <div>Device not found</div>
@@ -83,7 +83,7 @@ export default async function Device({ params }) {
                     <p>BIOS-password: <label>{device.biospass ? device.biospass : "Not set"}</label></p>
                     <p>Wake-On-Lan: <label>{device.wol ? device.wol : "Not set"}</label></p>
                     <p>Wake-On-Lan-Omit: <label>{device.wolo ? device.wolo : "Not set"}</label></p>
-                    <p>DirectAccess: <label>{device.da ? device.da : "Not set"}</label></p>
+                    <p>DirectAccess: <label>{device.da ? "Set": "Not set"}</label></p>
                     <p>Local admin-password: <label>WORK IN PROGRESS</label></p>
                     <p>Password expires: <label>WORK IN PROGRESS</label></p>
                     <p>Extra information: <label>{device.extrainfo ? device.extrainfo : "None"}</label></p>

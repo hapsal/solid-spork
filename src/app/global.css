@@ -22,16 +22,27 @@
   margin: 0;
 }
 
+html, body { 
+  height: 100%;
+}
+
 body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;  
 }
 
 main {
   margin: 0 auto;
   max-width: var(--max-width);
+
+  min-height: 100%;
+}
+
+body > footer {
+  position: sticky;
+  top: 100vh;
 }
 
 
