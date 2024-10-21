@@ -58,6 +58,11 @@
     width: 125px;
     height: 50px;
     
+    cursor: pointer;
+}
+
+.deletebutton:hover {
+    background-color: #eb8500;
 }
 
 .editbutton {
@@ -69,4 +74,10 @@
 
     width: 125px;
     height: 50px;
+
+    cursor: pointer;
+}
+
+.editbutton:hover {
+    background-color: #00b7ff;
 }

@@ -101,6 +101,12 @@
 
     width: 100px;
     height: 50px;
+
+    cursor: pointer;
+}
+
+.searchbutton:hover {
+    background-color: #00FFB2;
 }
 
 .searchresult {

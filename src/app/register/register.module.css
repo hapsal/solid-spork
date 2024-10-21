@@ -135,6 +135,17 @@
 
     width: 75px;
     height: 40px;
+
+    cursor: pointer;
+}
+
+.backbutton:hover {
+    background-color: #eb8500;
+}
+
+
+.registerbutton:hover {
+    background-color: #00b7ff;
 }
 
 .registerbutton {
@@ -146,6 +157,8 @@
 
     width: 75px;
     height: 40px;
+
+    cursor: pointer;
 }
 
 .error {

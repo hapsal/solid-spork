@@ -5,7 +5,7 @@ const DeviceButtons = ({ deviceId }) => {
 
     const handleClick = async (event) => {
         event.preventDefault()
-        console.log("Delete clicked for device ID:", deviceId);
+        //console.log("Delete clicked for device ID:", deviceId);
     
         try {
             const response = await fetch(`/api/delete`, {
@@ -21,7 +21,7 @@ const DeviceButtons = ({ deviceId }) => {
             }
     
             const data = await response.json()
-            console.log(data.message)
+            //console.log(data.message)
         } catch (error) {
             console.error('Error deleting device:', error)
         }
