@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { isMACAddress, isUUID } from 'validator'
-import { MongoClient } from 'mongodb'
+import { MongoClient, ObjectId } from 'mongodb'
 
 const schema = z.object({
     mac: z.string().refine(
@@ -143,6 +143,56 @@ export async function GET(res, { params }) {
             })
         }
     }
-
     
+}
+
+export async function DELETE(req, { params }) {
+    const slug = params.slug
+
+    if (slug === 'delete') {
+        const data = await req.json()
+        const { id } = data
+
+        if (!id) {
+            return new Response(JSON.stringify({ message: 'ID is required' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            })
+        }
+
+        let client
+        let db
+        try {
+            ({ client, db } = await connectToDatabase())
+            const collection = db.collection('registered-devices')
+            const result = await collection.deleteOne({ _id: new ObjectId(id) })
+
+            if (result.deletedCount === 1) {
+                return new Response(JSON.stringify({ message: 'Device deleted successfully' }), {
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' }
+                })
+            } else {
+                return new Response(JSON.stringify({ message: 'Device not found' }), {
+                    status: 404,
+                    headers: { 'Content-Type': 'application/json' }
+                })
+            }
+        } catch (error) {
+            console.error('Error deleting device:', error)
+            return new Response(JSON.stringify({ message: 'Internal server error' }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            })
+        } finally {
+            if (client) {
+                await client.close()
+            }
+        }
+    } else {
+        return new Response(JSON.stringify({ message: `Method Not Allowed` }), {
+            status: 405,
+            headers: { 'Content-Type': 'application/json' }
+        })
+    }
 }

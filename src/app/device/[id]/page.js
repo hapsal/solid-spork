@@ -1,6 +1,6 @@
 import { MongoClient, ObjectId } from 'mongodb'
-import Link from 'next/link'
-import styles from "./device.module.css";
+import styles from "./device.module.css"
+import DeviceButtons from "./devicebuttons.js"
 
 async function getDeviceById(id) {
     const client = new MongoClient(process.env.MONGODB_URI, {
@@ -38,6 +38,7 @@ async function getAllDeviceIds() {
     return devices.map(device => ({ params: { id: device._id.toString() } }))
 }
 
+
 export async function getStaticPaths() {
     const paths = await getAllDeviceIds()
     return {
@@ -49,7 +50,8 @@ export async function getStaticPaths() {
 export default async function Device({ params }) {
     const device = await getDeviceById(params.id)
 
-    console.log(device)
+
+    //console.log(device)
 
     if (!device) {
         return <div>Device not found</div>
@@ -90,8 +92,9 @@ export default async function Device({ params }) {
                     <p>Extra information: <label>{device.extrainfo ? device.extrainfo : "None"}</label></p>
                 </article>
                 <div className={styles.deviceinfobuttons}>
-                    <button className={styles.deletebutton}><Link href="#">Delete device</Link></button>
-                    <button className={styles.editbutton} type="submit">Edit device</button>
+                    {/* <button className={styles.deletebutton} type="submit">Delete device</button>
+                    <button className={styles.editbutton} type="submit">Edit device</button> */}
+                    <DeviceButtons deviceId={device._id.toString()} />
                 </div>
             </section>
         </div>
