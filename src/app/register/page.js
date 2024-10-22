@@ -288,12 +288,10 @@ const RegisterPage = () => {
 
                                 <label>Wake-On-LAN:</label>
                                 <Field type="checkbox" name="wol" 
-        
                                 />
 
                                 <label>Wake-On-LAN-Omit:</label>
                                 <Field type="checkbox" name="wolo" 
-  
                                 />
 
                                 <label>DirectAccess:</label>
