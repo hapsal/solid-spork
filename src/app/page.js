@@ -15,7 +15,8 @@ const HomePage = ()  => {
       const response = await fetch('/api/devicelist')
       const data = await response.json()
 
-      setDevices(data)
+      const sortedDevices = data.sort((a, b) => new Date(b.entryDate) - new Date(a.entryDate));
+      setDevices(sortedDevices)
     }
 
     fetchDevices()

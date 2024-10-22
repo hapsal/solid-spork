@@ -60,7 +60,7 @@ export async function POST(req, { params }) {
         try {
             const data = await req.json()
 
-            schema.parse(data);
+            schema.parse(data)
 
             const { client, db } = await connectToDatabase()
             const collection = db.collection('registered-devices')
@@ -188,6 +188,69 @@ export async function DELETE(req, { params }) {
             if (client) {
                 await client.close()
             }
+        }
+    } else {
+        return new Response(JSON.stringify({ message: `Method Not Allowed` }), {
+            status: 405,
+            headers: { 'Content-Type': 'application/json' }
+        })
+    }
+}
+
+export async function PUT(req, { params }) {
+    const slug = params.slug
+
+    if (slug === 'update-device') {
+        const data = await req.json();
+        //console.log("Data received for update:", data)
+
+        const { id, ...updateFields } = data
+
+        if (!id) {
+            return new Response(JSON.stringify({ message: 'ID is required' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            })
+        }
+
+        if (Object.keys(updateFields).length === 0) {
+            return new Response(JSON.stringify({ message: 'No fields to update' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            })
+        }
+
+        let client
+        let db
+
+        try {
+            ({ client, db } = await connectToDatabase())
+            const collection = db.collection('registered-devices')
+
+            const result = await collection.updateOne(
+                { _id: new ObjectId(id) }, 
+                { $set: updateFields } 
+            );
+
+            if (result.modifiedCount === 1) {
+                return new Response(JSON.stringify({ message: 'Device updated successfully' }), {
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' }
+                })
+            } else {
+                return new Response(JSON.stringify({ message: 'Device not found or no changes made' }), {
+                    status: 404,
+                    headers: { 'Content-Type': 'application/json' }
+                })
+            }
+        } catch (error) {
+            console.error('Error updating device:', error)
+            return new Response(JSON.stringify({ message: 'Internal server error' }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            })
+        } finally {
+            await client.close()
         }
     } else {
         return new Response(JSON.stringify({ message: `Method Not Allowed` }), {
