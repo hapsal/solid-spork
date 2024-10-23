@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb'
-import DeviceButtons from "./devicebuttons.js"
+import DeviceInfo from "./deviceinfo.js"
 
 async function getDeviceById(id) {
     const client = new MongoClient(process.env.MONGODB_URI, {
@@ -62,7 +62,7 @@ export default async function Device({ params }) {
 
     return (
         <div>
-            <DeviceButtons deviceId={device._id.toString()} deviceData={plainDevice} />
+            <DeviceInfo deviceId={device._id.toString()} deviceData={plainDevice} />
         </div>
     )
 }
