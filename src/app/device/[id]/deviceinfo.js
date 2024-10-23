@@ -20,12 +20,10 @@ const UpdateSchema =  Yup.object({
     model: Yup.string()
         .max(15, 'Must be 15 characters or less')
         .required('Required'),
-    uuid: Yup.string()
-        .max(50, 'Must be 50 characters or less')
-        .required('Required'),
     mac: Yup.string()
         .max(25, 'Must be 25 characters or less')
         .required('Required'),
+    printerpurpose: Yup.string().required('Required')
   })
 
 const DeviceButtons = ({ deviceId, deviceData }) => {
@@ -126,7 +124,9 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
                 wol: updateDevice.wol || '',
                 wolo: updateDevice.wolo || '',
                 da: updateDevice.da || '',
-                extrainfo: updateDevice.extrainfo || ''
+                extrainfo: updateDevice.extrainfo || '',
+                printqueue: updateDevice.printqueue || '',
+                printerpurpose: updateDevice.printerpurpose || ''
             }}
              validationSchema={UpdateSchema}
              onSubmit={handleEdit}
@@ -240,51 +240,82 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
                            
                             /></label>
                         </div>
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                         <p>UUID: </p><label>
                             <Field type="text" name="uuid" placeholder="e.g. f81d4fae-7dec-11d0-a765-00a0c91e6bf6" 
                                 className={errors.uuid && touched.uuid ? styles.inputerror : ''}
                                 /></label>
                         </div>
+                        }
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                         <p>Service ID: </p><label>
                             <Field type="text" name="serviceid" placeholder="e.g. 12A3B45" 
                                 className={errors.serviceid && touched.serviceid ? styles.inputerror : ''}
                                 /></label>
                         </div>
+                        }
                         <div className={styles.wrapper}>
                             <p>Registered on: </p><label>{new Date(updateDevice.entryDate).toLocaleDateString()}</label>
                         </div>
                         <div className={styles.wrapper}>
                             <p>Warranty Expiry: </p><label>{updateDevice.entryDate ? new Date(new Date(updateDevice.entryDate).setFullYear(new Date(updateDevice.entryDate).getFullYear() + 3)).toLocaleDateString() : "Not set"}</label>
                         </div>
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                         <p>BIOS-password: </p><label>
                             <Field type="text" name="biospass" placeholder="e.g. amazingpassword"
                                 value={values.biospass} 
                             /></label>
                         </div>
+                        }
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                         <p>Wake-On-Lan: </p><label>
                             <Field type="checkbox" name="wol" 
                              /></label>
                         </div>
+                        }
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                         <p>Wake-On-Lan-Omit: </p><label>
                             <Field type="checkbox" name="wolo" 
                                 /></label>
                         </div>
+                        }
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                         <p>DirectAccess: </p><label>
                             <Field type="checkbox" name="da" 
                                 /></label>
                         </div>
+                        }
+                         {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
-                            <p>Local admin-password: </p><label>WORK IN PROGRESS</label>
+                            <p>Local admin-password: </p><label>{updateDevice.localpass}</label>
                         </div>
+                        }
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>Password expires: </p><label>WORK IN PROGRESS</label>
                         </div>
+                        }
+                        {updateDevice.devicetype !== "Printer" ? <></> :
+                        <div className={styles.wrapper}>
+                            <p>Printer purpose: </p>
+                            <label>Public printer: <Field type="radio" name="printerpurpose" value="public" /></label>
+                            <label>Private printer: <Field type="radio" name="printerpurpose" value="private" /></label>
+                        </div>
+                        }
+                        {updateDevice.devicetype !== "Printer" ? <></> :
+                        <div className={styles.wrapper}>
+                            <p>Print queue: </p><label>
+                            <Field type="text" name="printqueue" placeholder="e.g. \\print.co.com\printer_name"
+                                value={values.printqueue} 
+                            /></label>
+                        </div>
+                        }
                         <div className={styles.wrapper}>
                             <p>Extra information: </p><label>
                             <Field as="textarea" name="extrainfo" placeholder="e.g. Who uses the computer" 
@@ -342,36 +373,62 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
                         <div className={styles.wrapper}>
                             <p>MAC-Address: </p><label>{updateDevice.mac}</label>
                         </div>
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>UUID: </p><label>{updateDevice.uuid}</label>
                         </div>
+                        }
+                         {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>Service ID: </p><label>{updateDevice.serviceid}</label>
                         </div>
+                        }
                         <div className={styles.wrapper}>
-                            <p>Registered on: </p><label>{new Date(updateDevice.entryDate).toLocaleDateString()}</label>
+                            <p>Registered on: </p><label>{new Date(updateDevice.date).toLocaleDateString()}</label>
                         </div>
                         <div className={styles.wrapper}>
-                            <p>Warranty Expiry: </p><label>{updateDevice.entryDate ? new Date(new Date(updateDevice.entryDate).setFullYear(new Date(updateDevice.entryDate).getFullYear() + 3)).toLocaleDateString() : "Not set"}</label>
+                            <p>Warranty Expiry: </p><label>{updateDevice.date ? new Date(new Date(updateDevice.date).setFullYear(new Date(updateDevice.date).getFullYear() + 3)).toLocaleDateString() : "Not set"}</label>
                         </div>
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>BIOS-password: </p><label>{updateDevice.biospass ? updateDevice.biospass : "Not set"}</label>
                         </div>
+                        }
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>Wake-On-Lan: </p><label>{updateDevice.wol ? "Set" : "Not set"}</label>
                         </div>
+                        }
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>Wake-On-Lan-Omit: </p><label>{updateDevice.wolo ? "Set" : "Not set"}</label>
                         </div>
+                        }
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>DirectAccess: </p><label>{updateDevice.da ? "Set": "Not set"}</label>
                         </div>
+}
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
-                            <p>Local admin-password: </p><label>WORK IN PROGRESS</label>
+                            <p>Local admin-password: </p><label>{updateDevice.localpass}</label>
                         </div>
+                        }
+                        {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>Password expires: </p><label>WORK IN PROGRESS</label>
                         </div>
+                        }
+                        {updateDevice.devicetype !== "Printer" ? <></> :
+                        <div className={styles.wrapper}>
+                            <p>Printer purpose: </p><label>{updateDevice.printerpurpose}</label>
+                        </div>
+                        }
+                        {updateDevice.devicetype !== "Printer" ? <></> :
+                        <div className={styles.wrapper}>
+                            <p>Printer queue: </p><label>{updateDevice.printqueue}</label>
+                        </div>
+                        }
                         <div className={styles.wrapper}>
                             <p>Extra information: </p><label>{updateDevice.extrainfo ? updateDevice.extrainfo : "None"}</label>
                         </div>

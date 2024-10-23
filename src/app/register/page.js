@@ -22,12 +22,10 @@ const RegisterSchema =  Yup.object({
     model: Yup.string()
         .max(15, 'Must be 15 characters or less')
         .required('Required'),
-    uuid: Yup.string()
-        .max(50, 'Must be 50 characters or less')
-        .required('Required'),
     mac: Yup.string()
         .max(25, 'Must be 25 characters or less')
         .required('Required'),
+    printerpurpose: Yup.string().required('Required')
   })
 
 const RegisterPage = () => {
@@ -103,7 +101,7 @@ const RegisterPage = () => {
                 validationSchema={RegisterSchema}
                 onSubmit={HandleSubmit}
                 >
-                {({ errors, touched, values, handleChange }) => ( 
+                {({ errors, touched, values, handleChange }) => (
                     <Form>
                     <div className={styles.formsection}>
                         <p>User information</p>
@@ -200,7 +198,7 @@ const RegisterPage = () => {
                     <div className={styles.formsection}>
                         <p>Device</p>
                         <label>Device type:*</label>
-                        <Field as="select" name="devicetype" form="deviceregister" value={values.devicetype} onChange={handleChange}>
+                        <Field as="select" name="devicetype" form="deviceregister">
                             <option value="">Select Device type</option>
                             <option value="Laptop">Laptop</option>
                             <option value="Desktop Computer">Desktop Computer</option>
@@ -304,7 +302,7 @@ const RegisterPage = () => {
                                 />
                             </>
                             )}
-                            {values.devicetype === 'Printer' && (
+                            {values.devicetype === "Printer" && (
                             <>
                                 <label>Manufacturer:*</label>
                                 <Field type="text" name="manufacturer" placeholder="e.g. HP" 
@@ -355,6 +353,12 @@ const RegisterPage = () => {
                                 <label>Purpose of the printer:</label>
                                 <label>Public printer: <Field type="radio" name="printerpurpose" value="public" /></label>
                                 <label>Private printer: <Field type="radio" name="printerpurpose" value="private" /></label>
+
+                                {touched.printerpurpose && errors.printerpurpose ? (
+
+                                <div className={styles.error}>{errors.printerpurpose}</div>
+
+                                ) : null}
 
                                 <label>Print queue name:</label>
                                 <Field type="text" name="printqueue" placeholder="e.g. \\print.co.com\printer_name" 

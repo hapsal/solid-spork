@@ -7,10 +7,10 @@ const schema = z.object({
         val => isMACAddress(val),
         { message: 'Please enter a valid MAC address' }
     ),
-    uuid: z.string().refine(
+   /*  uuid: z.string().refine(
         val => isUUID(val),
         { message: 'Please enter a valid UUID' }
-    )
+    ), */
 })
 
 async function connectToDatabase() {
@@ -32,25 +32,53 @@ async function getLastDeviceName(collection) {
     return lastDevice.length ? lastDevice[0].deviceName : null
 }
 
+async function isDeviceNameExists(collection, deviceName) {
+    const count = await collection.countDocuments({ deviceName })
+    return count > 0
+}
+
 async function generateDeviceName(collection) {
     const newDate = new Date()
     const orgInitials = "CO-"
-
-    const lastDeviceName = await getLastDeviceName(collection)
-
+    
+    let lastDeviceName = await getLastDeviceName(collection)
     let lastIncrement = 0
+
     if (lastDeviceName) {
         lastIncrement = parseInt(lastDeviceName.slice(-3), 10)
     }
 
-    const newIncrement = lastIncrement + 1
+    let newIncrement = lastIncrement + 1;
+    let deviceName
+    
+    while (true) {
+        deviceName = orgInitials +
+            Number(String(newDate.getFullYear()).slice(2)) +
+            String(newDate.getMonth() + 1).padStart(2, '0') +
+            String(newIncrement).padStart(2, '0')
 
-    const deviceName = orgInitials +
-        Number(String(newDate.getFullYear()).slice(2)) +
-        String(newDate.getMonth() + 1).padStart(2, '0') +
-        String(newIncrement).padStart(2, '0')
+        if (!(await isDeviceNameExists(collection, deviceName))) {
+            break
+        }
+        
+        newIncrement++
+    }
 
     return deviceName
+}
+
+async function generateLocalPassword() {
+    const length = 15
+    let result = ''
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    const charactersLength = characters.length
+    let counter = 0
+
+    while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1
+    }
+    return result
 }
 
 export async function POST(req, { params }) {
@@ -67,6 +95,8 @@ export async function POST(req, { params }) {
 
             try {
                 const deviceName = await generateDeviceName(collection)
+
+                const localPass = data.devicetype !== 'Printer' ? await generateLocalPassword() : null;
                 
                 const rawRegisterData = {
                     deviceName: deviceName,
@@ -88,7 +118,9 @@ export async function POST(req, { params }) {
                     wol: data.wol,
                     wolo: data.wolo,
                     da: data.da,
+                    localpass: localPass,
                     printqueue: data.printqueue,
+                    printerpurpose: data.printerpurpose,
                     extrainfo: data.extrainfo,
                     entryDate: new Date()
                 }
