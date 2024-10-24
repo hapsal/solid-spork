@@ -11,7 +11,7 @@
   --background: #F2F2F2;
   --max-width: 1440px;
 
-  --font-color-blue: #00B2FF;
+  --font-color-blue: #2C0991;
 
 }
 
@@ -68,6 +68,13 @@ h3 {
 }
 
 .active {
-  color: #00FFB2;
-  text-decoration: underline;
+  background-color: #00FFB2;
+  font-weight: bold;
+  color: black;
+
+  padding: 0.75rem;
+}
+
+.active:hover {
+  color: black !important;
 }

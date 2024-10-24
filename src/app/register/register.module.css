@@ -129,23 +129,23 @@
 .backbutton {
     font-size: var(--font-size-md);
     color: white;
-    background-color: #FF2D34;
+    background-color: #D61D1A;
     border-radius: 1rem;
     border: 1px solid #D9D9D9;
 
-    width: 75px;
-    height: 40px;
+    width: 100px;
+    height: 50px;
 
     cursor: pointer;
 }
 
 .backbutton:hover {
-    background-color: #eb8500;
+    background-color: #BC571D;
 }
 
 
 .registerbutton:hover {
-    background-color: #00b7ff;
+    background-color: #3F78C0;
 }
 
 .registerbutton {
@@ -155,8 +155,8 @@
     border-radius: 1rem;
     border: 1px solid #D9D9D9;
 
-    width: 75px;
-    height: 40px;
+    width: 100px;
+    height: 50px;
 
     cursor: pointer;
 }

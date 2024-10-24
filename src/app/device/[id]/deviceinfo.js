@@ -296,11 +296,6 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
                             <p>Local admin-password: </p><label>{updateDevice.localpass}</label>
                         </div>
                         }
-                        {updateDevice.devicetype === "Printer" ? <></> :
-                        <div className={styles.wrapper}>
-                            <p>Password expires: </p><label>WORK IN PROGRESS</label>
-                        </div>
-                        }
                         {updateDevice.devicetype !== "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>Printer purpose: </p>
@@ -412,11 +407,6 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
                         {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>Local admin-password: </p><label>{updateDevice.localpass}</label>
-                        </div>
-                        }
-                        {updateDevice.devicetype === "Printer" ? <></> :
-                        <div className={styles.wrapper}>
-                            <p>Password expires: </p><label>WORK IN PROGRESS</label>
                         </div>
                         }
                         {updateDevice.devicetype !== "Printer" ? <></> :

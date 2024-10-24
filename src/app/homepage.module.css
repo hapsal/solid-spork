@@ -43,7 +43,7 @@
 }
 
 .devicecontent a {
-    color: #00B2FF;
+    color: #002BFF;
     text-decoration: underline;
 }
 
@@ -103,11 +103,14 @@
     height: 50px;
 
     cursor: pointer;
+    text-transform: uppercase;
 }
 
 .searchbutton:hover {
     background-color: #00FFB2;
+    color: black;
 }
+
 
 .searchresult {
     display: flex;
@@ -130,12 +133,12 @@
 }
 
 .searchresult tbody   {
-  background-color: #757575;
+  background-color: #4C4C4C;
   color: white;
 }
 
 .searchresult thead   {
-    background-color: #757575;
+    background-color: #4C4C4C;
     color: white;
   }
 
