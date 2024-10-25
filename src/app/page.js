@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "./homepage.module.css";
+import styles from "./homepage.module.css"
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -91,8 +91,8 @@ const HomePage = ()  => {
                       <thead>
                         <tr>
                           <th>Name</th>
-                          <th>Service ID</th>
                           <th>Type</th>
+                          <th>Service ID</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -102,10 +102,10 @@ const HomePage = ()  => {
                             <Link href={`/device/${device._id}`}>{device.deviceName}</Link>
                           </th>
                           <th>
-                            {device.serviceid}
+                            {device.devicetype}
                           </th>
                           <th>
-                            {device.devicetype}
+                            {device.serviceid}
                           </th>
                         </tr>
                       )}
