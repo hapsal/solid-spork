@@ -25,7 +25,6 @@ const RegisterSchema =  Yup.object({
     mac: Yup.string()
         .max(25, 'Must be 25 characters or less')
         .required('Required'),
-    printerpurpose: Yup.string().required('Required')
   })
 
 const RegisterPage = () => {
