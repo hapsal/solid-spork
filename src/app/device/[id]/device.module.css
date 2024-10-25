@@ -157,3 +157,43 @@
     border-color: #007BFF; 
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; 
+    background-color: white;
+    border: 1px solid #D9D9D9;
+    border-radius: 0.5rem;
+    position:  absolute;
+    width: 500px;
+    height: 200px;
+    top: 70px;
+    bottom: 70px;
+    left: calc(50% - 125px);
+}
+
+.modal p {
+    font-size: var(--font-size-xl);
+    color: red;
+}
+
+.modal button {
+    font-size: var(--font-size-md);
+    color: white;
+    background-color: #302DFF;
+    border-radius: 1rem;
+    border: 1px solid #D9D9D9;
+
+    width: 125px;
+    height: 50px;
+
+    cursor: pointer;
+}
+  
+
+.modal button:hover {
+    background-color: #3F78C0;
+}

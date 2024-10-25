@@ -1,8 +1,11 @@
 "use client"
 import styles from "./device.module.css"
 import { useState, useEffect} from "react"
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
+import { createPortal } from 'react-dom'
+import ModalContent from './ModalContent.js'
+
 
 const UpdateSchema =  Yup.object({
     name: Yup.string()
@@ -26,9 +29,10 @@ const UpdateSchema =  Yup.object({
     printerpurpose: Yup.string().required('Required')
   })
 
-const DeviceButtons = ({ deviceId, deviceData }) => {
+const DeviceInfo = ({ deviceId, deviceData }) => {
     const [updateDevice, setUpdateDevice] = useState({})
     const [isEditing, setIsEditing] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         setUpdateDevice(deviceData)
@@ -51,6 +55,12 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
             if (!response.ok) {
                 throw new Error('Failed to delete device')
             }
+            scrollToTop()
+            
+            setTimeout(() => {
+                setShowModal(true);
+            }, 300)
+
         } catch (error) {
             console.error('Error deleting device:', error)
         }
@@ -100,6 +110,13 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
 
     const handleCancel = () => {
         setIsEditing(false)
+    }
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        })
     }
 
     return (
@@ -313,7 +330,7 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
                         }
                         <div className={styles.wrapper}>
                             <p>Extra information: </p><label>
-                            <Field as="textarea" name="extrainfo" placeholder="e.g. Who uses the computer" 
+                            <Field as="textarea" name="extrainfo" placeholder="e.g. Who uses the device" 
                                 value={values.extrainfo} 
                             /></label>
                         </div>
@@ -327,11 +344,18 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
                  )}
              </Formik>
         ) : (
-            <>
+            showModal ? (
+                <div>
+                {showModal && createPortal(
+                    <ModalContent onClose={() => setShowModal(false)} />,
+                    document.body
+                )}
+                </div>
+            ) : (
                 <section className={styles.devicesection}>
-                    <h1>Device information for: <label className={styles.deviceinfoname}>{updateDevice.deviceName}</label></h1>
+                    <h1>Device Information for: <label className={styles.deviceinfoname}>{updateDevice.deviceName}</label></h1>
                     <article>
-                        <h2>User information</h2>
+                        <h2>User Information</h2>
                         <div className={styles.wrapper}>
                             <p>Name: </p> <label>{updateDevice.name}</label>
                         </div>
@@ -352,7 +376,7 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
                         </div>
                     </article>
                     <article>
-                        <h2>Device</h2>
+                        <h2>Device Information</h2>
                         <div className={styles.wrapper}>
                             <p>Device name: </p><label>{updateDevice.deviceName}</label>
                         </div>
@@ -403,7 +427,7 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
                         <div className={styles.wrapper}>
                             <p>DirectAccess: </p><label>{updateDevice.da ? "Set": "Not set"}</label>
                         </div>
-}
+                        }
                         {updateDevice.devicetype === "Printer" ? <></> :
                         <div className={styles.wrapper}>
                             <p>Local admin-password: </p><label>{updateDevice.localpass}</label>
@@ -426,12 +450,12 @@ const DeviceButtons = ({ deviceId, deviceData }) => {
                     <div className={styles.deviceinfobuttons}>
                         <button onClick={handleDelete} className={styles.deletebutton}>Delete device</button>
                         <button onClick={handleEdit} className={styles.editbutton}>Edit device</button>
-                    </div>
+                    </div> 
                 </section>
-            </>
+            )
         )}
     </>
     );
 }
 
-export default DeviceButtons
+export default DeviceInfo
