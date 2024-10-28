@@ -2,11 +2,17 @@
  
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { useState } from 'react'
 
 import styles from "./navigation.module.css"
  
 const NavLinks = () => {
   const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
  
   return (
     <header className={styles.header}>
@@ -17,30 +23,37 @@ const NavLinks = () => {
           </Link>
         </div>
         <div className={styles.rightnav}>
-        <li>
-            <Link
-              className={`link ${pathname === '/' ? 'active' : ''}`}
-              href="/"
-            >
-              Home
-            </Link>
-          </li>
+        <div className={`${styles.burger} ${isMenuOpen ? styles.active : ''}`} onClick={toggleMenu}>
+          <div className={`${styles.burgerLine} ${isMenuOpen ? styles.line1Active : ''}`}></div>
+          <div className={`${styles.burgerLine} ${isMenuOpen ? styles.line2Active : ''}`}></div>
+          <div className={`${styles.burgerLine} ${isMenuOpen ? styles.line3Active : ''}`}></div>
+       </div>
+       <ul className={`${styles.rightnav} ${isMenuOpen ? styles.active : ''}`}>
           <li>
-            <Link
-              className={`link ${pathname === '/register' ? 'active' : ''}`}
-              href="/register"
-            >
-              Register Device
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={`link ${pathname === '/search' ? 'active' : ''}`}
-              href="/search"
-            >
-              Advanced search
-            </Link>
-          </li>  
+              <Link
+                className={`link ${pathname === '/' ? 'active' : ''}`}
+                href="/"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={`link ${pathname === '/register' ? 'active' : ''}`}
+                href="/register"
+              >
+                Register Device
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={`link ${pathname === '/search' ? 'active' : ''}`}
+                href="/search"
+              >
+                Advanced search
+              </Link>
+            </li> 
+          </ul> 
         </div>
       </nav>
     </header>

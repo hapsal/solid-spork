@@ -69,7 +69,7 @@ const RegisterPage = () => {
     }
     
     return (
-        <div>
+        <div className={styles.register}>
             <h1 className={styles.registertitle}>Register a new device</h1>
             <h2 className={styles.success}>{formdata.message}</h2>
             <section>
@@ -104,7 +104,7 @@ const RegisterPage = () => {
                     <Form>
                     <div className={styles.formsection}>
                         <p>User information</p>
-                        <label htmlFor="name">Name:*</label>
+                        <label>Name:*</label>
                         <Field type="text" name="name" placeholder="e.g. John Doe" 
               
                          className={errors.name && touched.name ? styles.inputerror : ''}
@@ -372,13 +372,14 @@ const RegisterPage = () => {
                             )}
                         </div>
                         <div className={styles.formbuttons}>
-                            <button className={styles.backbutton}><Link href="/">Back</Link></button>
+                            <div className={styles.backbutton}><Link href="/">Back</Link></div>
                             <button className={styles.registerbutton} type="submit" disabled={isLoading}>{isLoading ? 'Loading...' : 'Register'}</button>
                         </div>
                     </div>
                     </Form>
                     )}
                 </Formik>
+
             </section>
         </div>
     )
