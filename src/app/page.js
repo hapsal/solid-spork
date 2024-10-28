@@ -41,8 +41,10 @@ const HomePage = ()  => {
 
   return (
     <div className={styles.spacing2xl}>
-      <h1 className={styles.bold}>Welcome to device management</h1>
-      <Link href="/register"><span className={styles.registerlink}>Register a new device</span></Link>
+      <div className={styles.topcontent}>
+        <h1 className={styles.bold}>Welcome to device management</h1>
+        <Link href="/register"><span className={styles.registerlink}>Register a new device</span></Link>
+        </div>
         <section className={`${styles.maincontent} ${styles.spacing2xl}`}>
               <article className={styles.devicecontent}>
                 <h2>Latest devices</h2>

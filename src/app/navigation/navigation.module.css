@@ -6,12 +6,88 @@
     top: 0;
 }
 
+
 .navigation {
     display: flex;
     justify-content: space-between;
     max-width: var(--max-width);
     margin: 0 auto;
 }
+
+.burger {
+    display: none;
+    cursor: pointer;
+  }
+
+@media (max-width: 93.75rem) {
+    .navigation {
+        max-width: 720px;
+    }
+    .burger {
+        display: block;
+    }
+
+    .burgerLine {
+        width: 30px;
+        height: 3px;
+        background-color: white;
+        margin: 5px 0;
+        transition: all 0.3s ease
+    }
+
+    .rightnav li {
+        display: none;
+    }
+
+
+    .rightnav.active {
+        display: block; 
+        background-color: black; 
+        position: absolute;
+        height: 150px;
+        width: 100%;
+        top: 60px;
+        right: 0;
+        transition: all 0.3s ease
+      }
+
+    .rightnav.active li {
+        display: flex;
+        margin-bottom: 1rem;
+    }
+
+
+      .burger.active .line1Active {
+        transform: rotate(45deg); 
+        position: relative; 
+        top: 18px;
+      }
+
+      .burger.active .line2Active {
+        opacity: 0;
+      }
+      
+      .burger.active .line3Active {
+        transform: rotate(-45deg);
+        position: relative;
+        top: 2px;
+      }
+
+      .burger.active {
+        position: relative;
+        top: -5px;
+      }
+
+}
+
+@media (max-width: 53.125rem) {
+    .navigation {
+        max-width: 360px;
+    }
+
+}
+
+
 
 .logo {
     color: white;

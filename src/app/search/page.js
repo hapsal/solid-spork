@@ -147,7 +147,7 @@ const SearchPage = () => {
                     {searchInitiated && filteredDevices.length === 0 
                     ? <p>No devices found</p> 
                     : 
-                    <table>
+                    <table className={styles.table}>
                         <thead>
                             <tr>
                                 <th>Name</th>

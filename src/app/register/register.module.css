@@ -11,10 +11,23 @@
     display: flex;
     flex-direction: column;
 
-    width: 500px;
-
     text-align: left;
 }
+
+.register {
+    border: 1px solid #D9D9D9;
+    border-radius: 1rem;
+    background-color: white;
+    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    width: 820px;
+
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+
 
 .formsection select {
     appearance: none;
@@ -136,6 +149,9 @@
     width: 100px;
     height: 50px;
 
+    align-content: center;
+    text-align: center;
+
     cursor: pointer;
 }
 
@@ -174,4 +190,31 @@
 
 .success {
     color: rgb(0, 190, 0);
+}
+
+
+@media (max-width: 93.75rem) {
+    .register {
+        max-width: 720px;
+    }
+}
+
+@media (max-width: 53.125rem) {
+    .register {
+        max-width: 360px;
+    }
+
+    .registertitle {
+        font-size: var(--font-size-lg);
+    }
+
+    .formsection label {
+        font-size: var(--font-size-sm);
+    }
+
+    .formsection p {
+        font-size: var(--font-size-md);
+    }
+
+
 }

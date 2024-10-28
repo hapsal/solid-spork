@@ -78,3 +78,19 @@ h3 {
 .active:hover {
   color: black !important;
 }
+
+@media (max-width: 93.75rem) {
+  main {
+    max-width: 720px;
+  }
+
+  .active {
+    width: 100%;
+  }
+}
+
+@media (max-width: 53.125rem) {
+  main {
+    max-width: 360px;
+  }
+}
