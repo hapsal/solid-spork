@@ -240,5 +240,16 @@
     .hideOnMobile {
         display: none;
     }
+
+    .devicecontent h2 {
+        font-size: var(--font-size-md);
+    }
     
+    .devicecontent th {
+        font-size: var(--font-size-sm);
+    }
+
+    .devicecontent td {
+        font-size: var(--font-size-sm);
+    }
 }

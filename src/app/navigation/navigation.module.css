@@ -19,6 +19,34 @@
     cursor: pointer;
   }
 
+.logo {
+    color: white;
+    font-size: var(--font-size-3xl);
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+
+.rightnav {
+    color: white;
+    text-transform: uppercase;
+    align-self: center;
+
+    display: flex;
+    
+    gap: 1rem;
+}
+
+.rightnav li {
+    list-style-type: none;
+}
+
+.rightnav a:hover {
+    color: #00FFB2;
+}
+
+
+
 @media (max-width: 93.75rem) {
     .navigation {
         max-width: 720px;
@@ -46,9 +74,10 @@
         position: absolute;
         height: 150px;
         width: 100%;
-        top: 60px;
+        top: 100%;
         right: 0;
-        transition: all 0.5s ease
+        transition: all 0.5s ease;
+        padding-top: 1rem;
       }
 
     .rightnav.active li {
@@ -85,34 +114,13 @@
         max-width: 360px;
     }
 
+
+    .rightnav a {
+        font-size: var(--font-size-xs);
+    }
+
+    .logo {
+        font-size: var(--font-size-2xl);
+    }
+
 }
-
-
-
-.logo {
-    color: white;
-    font-size: var(--font-size-3xl);
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-
-.rightnav {
-    color: white;
-    text-transform: uppercase;
-    align-self: center;
-
-    display: flex;
-    
-    gap: 1rem;
-}
-
-.rightnav li {
-    list-style-type: none;
-}
-
-.rightnav a:hover {
-    color: #00FFB2;
-}
-
-

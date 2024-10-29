@@ -22,7 +22,7 @@ const NavLinks = () => {
     <header className={styles.header}>
       <nav className={styles.navigation}>
         <div>
-          <Link className={`link ${pathname === '/'}`} href="/">
+          <Link className={`link ${pathname === '/'}`} href="/" onClick={handleLinkClick}>
             <span className={styles.logo}>DEMA</span>
           </Link>
         </div>
