@@ -203,7 +203,13 @@
     .devicesection {
         max-width: 720px;
     }
+
+    .modal {
+        max-width: 720px;
+        left: calc(50% - 220px);
+    }
 }
+
 
 @media (max-width: 53.125rem) {
     .devicesection {
@@ -235,6 +241,11 @@
     }
     .wrapper select {
         max-width: 150px;
+    }
+
+    .modal {
+        max-width: 360px;
+        left: calc(50% - 180px);
     }
 
 }
