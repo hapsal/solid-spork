@@ -13,6 +13,10 @@ const NavLinks = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
+
+  const handleLinkClick = () => {
+    setIsMenuOpen(false)
+  }
  
   return (
     <header className={styles.header}>
@@ -33,6 +37,7 @@ const NavLinks = () => {
               <Link
                 className={`link ${pathname === '/' ? 'active' : ''}`}
                 href="/"
+                onClick={handleLinkClick}
               >
                 Home
               </Link>
@@ -41,6 +46,7 @@ const NavLinks = () => {
               <Link
                 className={`link ${pathname === '/register' ? 'active' : ''}`}
                 href="/register"
+                onClick={handleLinkClick}
               >
                 Register Device
               </Link>
@@ -49,6 +55,7 @@ const NavLinks = () => {
               <Link
                 className={`link ${pathname === '/search' ? 'active' : ''}`}
                 href="/search"
+                onClick={handleLinkClick}
               >
                 Advanced search
               </Link>

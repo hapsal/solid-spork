@@ -153,10 +153,10 @@ const SearchPage = () => {
                                 <th>Name</th>
                                 <th>Type</th>
                                 <th>Service ID</th>
-                                <th>MAC</th>
-                                <th>UUID</th>
-                                <th>Cost Center</th>
-                                <th>Location</th>
+                                <th className={styles.hideOnMobile}>MAC</th>
+                                <th className={styles.hideOnMobile}>UUID</th>
+                                <th className={styles.hideOnMobile}>Cost Center</th>
+                                <th className={styles.hideOnMobile}>Location</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -171,16 +171,16 @@ const SearchPage = () => {
                                 <th>
                                     {device.serviceid}
                                 </th>
-                                <th>
+                                <th className={styles.hideOnMobile}>
                                     {device.mac}
                                 </th>
-                                <th>
+                                <th className={styles.hideOnMobile}>
                                     {device.uuid}
                                 </th>
-                                <th>
+                                <th className={styles.hideOnMobile}>
                                     {device.costcenter}
                                 </th>
-                                <th>
+                                <th className={styles.hideOnMobile}>
                                     {device.location}
                                 </th>
                             </tr>
