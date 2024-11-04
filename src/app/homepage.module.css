@@ -8,6 +8,10 @@
     text-decoration: underline;
 }
 
+.topcontent h1 {
+    margin-bottom: 1rem;
+}
+
 .spacing2xl > * {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
@@ -49,6 +53,7 @@
 
 .devicecontent h2 {
     margin-bottom: 1rem;
+    color: var(--font-color-blue);
 }
 
 .searchcontent {
@@ -63,6 +68,9 @@
 .searchcontent > * {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
+}
+.searchcontent h2 {
+    color: var(--font-color-blue);
 }
 
 .searchform {
@@ -158,12 +166,32 @@
     text-decoration: underline;
 }
 
-.terms {
-    
+
+.terms li {
+    margin-left: 1rem;
+}
+
+.terms ol {
+    margin-top: 1rem;
+}
+
+.termslistupper  {
+    list-style-type: upper-alpha;
+    margin-left: 1rem;
+}
+
+.termslistlower {
+    list-style-type: lower-alpha;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
 }
 
 .advancedsearch {
     margin-top: 2rem;
+}
+
+.advancedsearch h2 {
+    color: var(--font-color-blue);
 }
 
 .advancedcontent {
