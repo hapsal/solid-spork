@@ -342,8 +342,8 @@ const DeviceInfo = ({ deviceId, deviceData }) => {
                     </article>
                 
                 <div className={styles.deviceinfobuttons}>
-                    <button type="submit" className={styles.editbutton}>Save Changes</button>
                     <button type="button" onClick={handleCancel} className={styles.deletebutton}>Cancel</button>
+                    <button type="submit" className={styles.editbutton}>Save Changes</button>
                 </div>
                 </Form>
                  )}
