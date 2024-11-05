@@ -47,6 +47,22 @@
     cursor: pointer;
 }
 
+.customarrow {
+    position: relative;
+    display: inline-block;
+    width: 300px;
+}
+
+
+.customarrow::after {
+    content: "▼";
+    position: absolute;
+    font-size: var(--font-size-xs);
+    color: black;
+    pointer-events: none;
+    margin-top: 1rem;
+    right: 10px;
+}
 
 .formsection input::placeholder {
     opacity: 0.3;

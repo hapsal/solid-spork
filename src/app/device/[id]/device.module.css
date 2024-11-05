@@ -87,7 +87,7 @@
     
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-    width: 300px;
+    width: 325px;
     height: 45px;
 
     padding: 1rem;
@@ -103,7 +103,7 @@
 }
 
 .devicesection textarea {
-    width: 300px;
+    width: 325px;
     height: 100px;
 
     resize: none;
@@ -134,7 +134,7 @@
 }
 
 .wrapper select {
-    width: 300px;
+    width: 325px;
     height: 45px;
     padding: 1rem;
     border: 1px solid #D9D9D9;
@@ -145,6 +145,7 @@
     -moz-appearance: none;
     -webkit-appearance: none;
     cursor: pointer;
+    
 }
 
 
@@ -198,6 +199,23 @@
     background-color: #3F78C0;
 }
 
+.customarrow {
+    position: relative;
+    display: inline-block;
+    width: 325px;
+}
+
+
+.customarrow::after {
+    content: "▼";
+    position: absolute;
+    font-size: var(--font-size-xs);
+    color: black;
+    pointer-events: none;
+    margin-top: 1rem;
+    right: 10px;
+}
+
 
 @media (max-width: 93.75rem) {
     .devicesection {
@@ -225,15 +243,16 @@
     }
 
     .devicesection label {
-        font-size: var(--font-size-sm);
+        font-size: var(--font-size-xs);
     }
 
     .devicesection p {
-        font-size: var(--font-size-sm);
+        font-size: var(--font-size-xs);
     }
 
     .devicesection input[type=text] {
         max-width: 150px;
+        font-size: var(--font-size-xs);
     }
 
     .devicesection textarea {
@@ -241,11 +260,16 @@
     }
     .wrapper select {
         max-width: 150px;
+        font-size: var(--font-size-xs);
     }
 
     .modal {
         max-width: 360px;
         left: calc(50% - 180px);
+    }
+
+    .customarrow::after {
+     right: 180px;
     }
 
 }

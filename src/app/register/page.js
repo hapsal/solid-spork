@@ -132,23 +132,24 @@ const RegisterPage = () => {
                         <p>Organization</p>
 
                         <label>Cost Center:</label>
-                        <Field as="select" name="costcenter" form="deviceregister">
-                            <option value="">Select Cost Center</option>
-                            <option value="Compliance">Compliance</option>
-                            <option value="Customer Service">Customer Service</option>
-                            <option value="Engineering">Engineering</option>
-                            <option value="Facilities Management">Facilities Management</option>
-                            <option value="Finance and Accounting">Finance & Accounting</option>
-                            <option value="Human Resources">Human Resources</option>
-                            <option value="Information Technology">Information Technology</option>
-                            <option value="Legal Department">Legal Department</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Procurement">Procurement</option>
-                            <option value="Quality Assurance">Quality Assurance</option>
-                            <option value="Research and Development">Research & Development</option>
-                            <option value="Risk Management">Risk Management</option>
-                        </Field>
-
+                        <div className={styles.customarrow}>
+                            <Field as="select" name="costcenter" form="deviceregister">
+                                <option value="">Select Cost Center</option>
+                                <option value="Compliance">Compliance</option>
+                                <option value="Customer Service">Customer Service</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Facilities Management">Facilities Management</option>
+                                <option value="Finance and Accounting">Finance & Accounting</option>
+                                <option value="Human Resources">Human Resources</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Legal Department">Legal Department</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Procurement">Procurement</option>
+                                <option value="Quality Assurance">Quality Assurance</option>
+                                <option value="Research and Development">Research & Development</option>
+                                <option value="Risk Management">Risk Management</option>
+                            </Field>
+                        </div>
                         <label>Location:*</label>
                         <Field type="text" name="location" placeholder="e.g. New York" 
                         className={errors.location && touched.location ? styles.inputerror : ''}
@@ -161,48 +162,51 @@ const RegisterPage = () => {
                         ) : null}
 
                         <label>Home CO-Domain:*</label>
-                        <Field as="select" name="homedomain" form="deviceregister">
-                            <option value="">Select Home Domain</option>
-                            <option value="CO/Compliance/Computers">CO/Compliance/Computers</option>
-                            <option value="CO/Compliance/Printers">CO/Compliance/Printers</option>
-                            <option value="CO/Customerservice/Computers">CO/Customer Service/Computers</option>
-                            <option value="CO/Customerservice/Printers">CO/Customer Service/Printers</option>
-                            <option value="CO/Engineering/Computers">CO/Engineering/Computers</option>
-                            <option value="CO/Engineering/Printers">CO/Engineering/Printers</option>
-                            <option value="CO/Facilities/Computers">CO/Facilities Management/Computers</option>
-                            <option value="CO/Facilities/Printers">CO/Facilities Management/Printers</option>
-                            <option value="CO/Financeaccounting/Computers">CO/Finance & Accounting/Computers</option>
-                            <option value="CO/Financeaccounting/Printers">CO/Finance & Accounting/Printers</option>
-                            <option value="CO/Humanresources/Computers">CO/Human Resources/Computers</option>
-                            <option value="CO/Humanresources/Printers">CO/Human Resources/Printers</option>
-                            <option value="CO/Informationtechnology/Computers">CO/Information Technology/Computers</option>
-                            <option value="CO/Informationtechnolog/Printers">CO/Information Technology/Printers</option>
-                            <option value="CO/Legaldepartment/Computers">CO/Legal Department/Computers</option>
-                            <option value="CO/Legaldepartment/Printers">CO/Legal Department/Printers</option>
-                            <option value="CO/Marketing/Computers">CO/Marketing/Computers</option>
-                            <option value="CO/Marketing/Printers">CO/Marketing/Printers</option>
-                            <option value="CO/Procurement/Computers">CO/Procurement/Computers</option>
-                            <option value="CO/Procurement/Printers">CO/Procurement/Printers</option>
-                            <option value="CO/Qualityassurance/Computers">CO/Quality Assurance/Computers</option>
-                            <option value="CO/Qualityassurance/Printers">CO/Quality Assurance/Printers</option>
-                            <option value="CO/Researchdevelopment/Computers">CO/Research & Development/Computers</option>
-                            <option value="CO/Fesearchdevelopment/Printers">CO/Research & Development/Printers</option>
-                            <option value="CO/Riskmanagement/Computers">CO/Risk Management/Computers</option>
-                            <option value="CO/Riskmanagement/Printers">CO/Risk Management/Printers</option>
-                        </Field>
-
+                        <div className={styles.customarrow}>
+                            <Field as="select" name="homedomain" form="deviceregister">
+                                <option value="">Select Home Domain</option>
+                                <option value="CO/Compliance/Computers">CO/Compliance/Computers</option>
+                                <option value="CO/Compliance/Printers">CO/Compliance/Printers</option>
+                                <option value="CO/Customerservice/Computers">CO/Customer Service/Computers</option>
+                                <option value="CO/Customerservice/Printers">CO/Customer Service/Printers</option>
+                                <option value="CO/Engineering/Computers">CO/Engineering/Computers</option>
+                                <option value="CO/Engineering/Printers">CO/Engineering/Printers</option>
+                                <option value="CO/Facilities/Computers">CO/Facilities Management/Computers</option>
+                                <option value="CO/Facilities/Printers">CO/Facilities Management/Printers</option>
+                                <option value="CO/Financeaccounting/Computers">CO/Finance & Accounting/Computers</option>
+                                <option value="CO/Financeaccounting/Printers">CO/Finance & Accounting/Printers</option>
+                                <option value="CO/Humanresources/Computers">CO/Human Resources/Computers</option>
+                                <option value="CO/Humanresources/Printers">CO/Human Resources/Printers</option>
+                                <option value="CO/Informationtechnology/Computers">CO/Information Technology/Computers</option>
+                                <option value="CO/Informationtechnolog/Printers">CO/Information Technology/Printers</option>
+                                <option value="CO/Legaldepartment/Computers">CO/Legal Department/Computers</option>
+                                <option value="CO/Legaldepartment/Printers">CO/Legal Department/Printers</option>
+                                <option value="CO/Marketing/Computers">CO/Marketing/Computers</option>
+                                <option value="CO/Marketing/Printers">CO/Marketing/Printers</option>
+                                <option value="CO/Procurement/Computers">CO/Procurement/Computers</option>
+                                <option value="CO/Procurement/Printers">CO/Procurement/Printers</option>
+                                <option value="CO/Qualityassurance/Computers">CO/Quality Assurance/Computers</option>
+                                <option value="CO/Qualityassurance/Printers">CO/Quality Assurance/Printers</option>
+                                <option value="CO/Researchdevelopment/Computers">CO/Research & Development/Computers</option>
+                                <option value="CO/Fesearchdevelopment/Printers">CO/Research & Development/Printers</option>
+                                <option value="CO/Riskmanagement/Computers">CO/Risk Management/Computers</option>
+                                <option value="CO/Riskmanagement/Printers">CO/Risk Management/Printers</option>
+                            </Field>
+                        </div>
                         <label>Add to CO-Domain:</label>
                         <Field type="checkbox" name="addtodomain" />
                     </div>
                     <div className={styles.formsection}>
                         <p>Device</p>
                         <label>Device type:*</label>
-                        <Field as="select" name="devicetype" form="deviceregister">
-                            <option value="">Select Device type</option>
-                            <option value="Laptop">Laptop</option>
-                            <option value="Desktop Computer">Desktop Computer</option>
-                            <option value="Printer">Printer</option>
-                        </Field>
+                        <div className={styles.customarrow}>
+                            <Field as="select" name="devicetype" form="deviceregister">
+                                <option value="">Select Device type</option>
+                                <option value="Laptop">Laptop</option>
+                                <option value="Desktop Computer">Desktop Computer</option>
+                                <option value="Printer">Printer</option>
+                            </Field>
+                        </div>
                         <div className={styles.formsection}>
                             {(values.devicetype.match("Laptop") || values.devicetype.match("Desktop Computer")) && (
                             <>

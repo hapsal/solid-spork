@@ -164,6 +164,7 @@ const DeviceInfo = ({ deviceId, deviceData }) => {
                         <h2>Organization</h2>
                         <div className={styles.wrapper}>
                             <p>Cost Center: </p> <label>
+                            <div className={styles.customarrow}>
                                 <Field as="select" name="costcenter">
                                     <option value="Compliance">Compliance</option>
                                     <option value="Customer Service">Customer Service</option>
@@ -179,6 +180,7 @@ const DeviceInfo = ({ deviceId, deviceData }) => {
                                     <option value="Research and Development">Research & Development</option>
                                     <option value="Risk Management">Risk Management</option>
                                 </Field>
+                            </div>
                                 </label>
                         </div>
                         <div className={styles.wrapper}>
@@ -190,34 +192,37 @@ const DeviceInfo = ({ deviceId, deviceData }) => {
                         </div>
                         <div className={styles.wrapper}>
                         <p>Home CO-Domain: </p><label>
-                            <Field as="select" name="homedomain">
-                                <option value="CO/Compliance/Computers">CO/Compliance/Computers</option>
-                                <option value="CO/Compliance/Printers">CO/Compliance/Printers</option>
-                                <option value="CO/Customerservice/Computers">CO/Customer Service/Computers</option>
-                                <option value="CO/Customerservice/Printers">CO/Customer Service/Printers</option>
-                                <option value="CO/Engineering/Computers">CO/Engineering/Computers</option>
-                                <option value="CO/Engineering/Printers">CO/Engineering/Printers</option>
-                                <option value="CO/Facilities/Computers">CO/Facilities Management/Computers</option>
-                                <option value="CO/Facilities/Printers">CO/Facilities Management/Printers</option>
-                                <option value="CO/Financeaccounting/Computers">CO/Finance & Accounting/Computers</option>
-                                <option value="CO/Financeaccounting/Printers">CO/Finance & Accounting/Printers</option>
-                                <option value="CO/Humanresources/Computers">CO/Human Resources/Computers</option>
-                                <option value="CO/Humanresources/Printers">CO/Human Resources/Printers</option>
-                                <option value="CO/Informationtechnology/Computers">CO/Information Technology/Computers</option>
-                                <option value="CO/Informationtechnolog/Printers">CO/Information Technology/Printers</option>
-                                <option value="CO/Legaldepartment/Computers">CO/Legal Department/Computers</option>
-                                <option value="CO/Legaldepartment/Printers">CO/Legal Department/Printers</option>
-                                <option value="CO/Marketing/Computers">CO/Marketing/Computers</option>
-                                <option value="CO/Marketing/Printers">CO/Marketing/Printers</option>
-                                <option value="CO/Procurement/Computers">CO/Procurement/Computers</option>
-                                <option value="CO/Procurement/Printers">CO/Procurement/Printers</option>
-                                <option value="CO/Qualityassurance/Computers">CO/Quality Assurance/Computers</option>
-                                <option value="CO/Qualityassurance/Printers">CO/Quality Assurance/Printers</option>
-                                <option value="CO/Researchdevelopment/Computers">CO/Research & Development/Computers</option>
-                                <option value="CO/Fesearchdevelopment/Printers">CO/Research & Development/Printers</option>
-                                <option value="CO/Riskmanagement/Computers">CO/Risk Management/Computers</option>
-                                <option value="CO/Riskmanagement/Printers">CO/Risk Management/Printers</option>
-                            </Field></label>
+                                <div className={styles.customarrow}>
+                                <Field as="select" name="homedomain">
+                                    <option value="CO/Compliance/Computers">CO/Compliance/Computers</option>
+                                    <option value="CO/Compliance/Printers">CO/Compliance/Printers</option>
+                                    <option value="CO/Customerservice/Computers">CO/Customer Service/Computers</option>
+                                    <option value="CO/Customerservice/Printers">CO/Customer Service/Printers</option>
+                                    <option value="CO/Engineering/Computers">CO/Engineering/Computers</option>
+                                    <option value="CO/Engineering/Printers">CO/Engineering/Printers</option>
+                                    <option value="CO/Facilities/Computers">CO/Facilities Management/Computers</option>
+                                    <option value="CO/Facilities/Printers">CO/Facilities Management/Printers</option>
+                                    <option value="CO/Financeaccounting/Computers">CO/Finance & Accounting/Computers</option>
+                                    <option value="CO/Financeaccounting/Printers">CO/Finance & Accounting/Printers</option>
+                                    <option value="CO/Humanresources/Computers">CO/Human Resources/Computers</option>
+                                    <option value="CO/Humanresources/Printers">CO/Human Resources/Printers</option>
+                                    <option value="CO/Informationtechnology/Computers">CO/Information Technology/Computers</option>
+                                    <option value="CO/Informationtechnolog/Printers">CO/Information Technology/Printers</option>
+                                    <option value="CO/Legaldepartment/Computers">CO/Legal Department/Computers</option>
+                                    <option value="CO/Legaldepartment/Printers">CO/Legal Department/Printers</option>
+                                    <option value="CO/Marketing/Computers">CO/Marketing/Computers</option>
+                                    <option value="CO/Marketing/Printers">CO/Marketing/Printers</option>
+                                    <option value="CO/Procurement/Computers">CO/Procurement/Computers</option>
+                                    <option value="CO/Procurement/Printers">CO/Procurement/Printers</option>
+                                    <option value="CO/Qualityassurance/Computers">CO/Quality Assurance/Computers</option>
+                                    <option value="CO/Qualityassurance/Printers">CO/Quality Assurance/Printers</option>
+                                    <option value="CO/Researchdevelopment/Computers">CO/Research & Development/Computers</option>
+                                    <option value="CO/Fesearchdevelopment/Printers">CO/Research & Development/Printers</option>
+                                    <option value="CO/Riskmanagement/Computers">CO/Risk Management/Computers</option>
+                                    <option value="CO/Riskmanagement/Printers">CO/Risk Management/Printers</option>
+                                </Field>
+                            </div>
+                            </label>
                         </div>
                     </article>
                     <article>
