@@ -124,4 +124,8 @@
         font-size: var(--font-size-2xl);
     }
 
+    .rightnav.active {
+        height: 200px;
+      }
+
 }

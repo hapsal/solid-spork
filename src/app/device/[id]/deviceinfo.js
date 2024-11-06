@@ -232,11 +232,13 @@ const DeviceInfo = ({ deviceId, deviceData }) => {
                         </div>
                         <div className={styles.wrapper}>
                         <p>Device type: </p> <label>
+                        <div className={styles.customarrow}>
                             <Field as="select" name="devicetype">
                                 <option value="Laptop">Laptop</option>
                                 <option value="Desktop Computer">Desktop Computer</option>
                                 <option value="Printer">Printer</option>
                             </Field>
+                        </div>
                             </label>
                         </div>
                         <div className={styles.wrapper}>

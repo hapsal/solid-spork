@@ -224,12 +224,28 @@
         max-width: 720px;
         left: calc(50% - 220px);
     }
+
+    .wrapper select {
+        padding: 0;
+        padding-left: 1rem;
+        font-size: 16px;
+    }
+
+    .customarrow::after {
+        margin-top: 0.5rem;;
+    }
+
+    .editbutton {
+        font-size: var(--font-size-sm);
+    }
+
 }
 
 
 @media (max-width: 53.125rem) {
     .devicesection {
-        max-width: 360px;
+        max-width: 100%;
+        margin: 0 auto;
     }
 
     .devicesection h1 {
@@ -239,26 +255,26 @@
     .devicesection h2 {
         font-size: var(--font-size-md);
     }
-
+    
     .devicesection label {
         font-size: var(--font-size-xs);
     }
 
     .devicesection p {
-        font-size: var(--font-size-xs);
+        font-size: 16px;
     }
 
     .devicesection input[type=text] {
-        max-width: 150px;
-        font-size: var(--font-size-xs);
+        max-width: 275px;
+        font-size: 14px;
     }
 
     .devicesection textarea {
-        max-width: 150px;
+        max-width: 275px;
     }
     .wrapper select {
-        max-width: 150px;
-        font-size: var(--font-size-xs);
+        max-width: 275px;
+        font-size: 14px;
     }
 
     .modal {
@@ -267,7 +283,30 @@
     }
 
     .customarrow::after {
-     right: 180px;
+     right: 55px;
     }
 
+    .deletebutton {
+        font-size: var(--font-size-sm);
+    }
+
+    .deviceinfoname {
+        font-size: 24px !important;
+    }
+
+    .wrapper p {
+        flex: 0 0 100px;
+    }
+
+    .wrapper select {
+        padding-left: 0.25rem;
+    }
+
+    .devicesection input[type=text] {
+        padding-left: 0.25rem;
+    }
+
+    .devicesection textarea {
+        padding-left: 0.25rem;
+    }
 }

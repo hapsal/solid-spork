@@ -36,7 +36,6 @@ body {
 main {
   margin: 0 auto;
   max-width: var(--max-width);
-
   min-height: 100%;
 }
 
@@ -87,10 +86,14 @@ h3 {
   .active {
     width: 100%;
   }
+
 }
 
 @media (max-width: 53.125rem) {
   main {
-    max-width: 360px;
+    max-width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
   }
 }

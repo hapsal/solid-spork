@@ -139,7 +139,7 @@ const HomePage = ()  => {
           </ol>
         </section>
     </div>
-  );
+  )
 }
 
 export default HomePage;

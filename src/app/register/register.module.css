@@ -213,11 +213,15 @@
     .register {
         max-width: 720px;
     }
+
+    .customarrow::after {
+        margin-top: 0.5rem;
+    }
 }
 
 @media (max-width: 53.125rem) {
     .register {
-        max-width: 360px;
+        max-width: 100%;
     }
 
     .registertitle {
@@ -232,5 +236,22 @@
         font-size: var(--font-size-md);
     }
 
+    
+    .formsection select {
+        padding: 0;
+        padding-left: 1rem;
+        font-size: 14px;
+    }
 
+    .formsection input::placeholder {
+        font-size: 14px;
+    }
+
+    .formsection input[type=date] { 
+        font-size: 14px;
+    }
+
+    .formbuttons {
+        width: 100%;
+    }
 }
