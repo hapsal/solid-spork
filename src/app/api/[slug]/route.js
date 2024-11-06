@@ -45,10 +45,12 @@ async function generateDeviceName(collection) {
     let lastIncrement = 0
 
     if (lastDeviceName) {
-        lastIncrement = parseInt(lastDeviceName.slice(-3), 10)
+        const lastIncrementString = lastDeviceName.slice(-2)
+        lastIncrement = parseInt(lastIncrementString, 10)
     }
 
-    let newIncrement = lastIncrement + 1;
+    let newIncrement = lastIncrement + 1
+
     let deviceName
     
     while (true) {
@@ -75,7 +77,7 @@ async function generateLocalPassword() {
     let counter = 0
 
     while (counter < length) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt(Math.floor(Math.random() * charactersLength))
         counter += 1
     }
     return result
