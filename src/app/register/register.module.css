@@ -34,7 +34,7 @@
     background-color: transparent;
 
     width: 315px;
-    height: 45px;
+    height: 80x;
 
     border: 1px solid #D9D9D9;
     border-radius: 0.5rem;
@@ -213,9 +213,6 @@
         max-width: 720px;
     }
 
-    .customarrow::after {
-        margin-top: 0.5rem;
-    }
 }
 
 @media (max-width: 53.125rem) {
@@ -240,6 +237,7 @@
         padding: 0;
         padding-left: 1rem;
         font-size: 14px;
+        height: 50px;
     }
 
     .formsection input::placeholder {
