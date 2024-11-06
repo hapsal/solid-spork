@@ -246,6 +246,8 @@
     .devicesection {
         max-width: 100%;
         margin: 0 auto;
+
+        margin-top: 1rem;
     }
 
     .devicesection h1 {
@@ -265,25 +267,26 @@
     }
 
     .devicesection input[type=text] {
-        max-width: 275px;
+        max-width: 200px;
         font-size: 14px;
     }
 
     .devicesection textarea {
-        max-width: 275px;
+        max-width: 200px;
     }
+    
     .wrapper select {
-        max-width: 275px;
+        max-width: 200px;
         font-size: 14px;
     }
 
     .modal {
-        max-width: 360px;
+        max-width: 250px;
         left: calc(50% - 180px);
     }
 
     .customarrow::after {
-     right: 55px;
+        right: 125px;
     }
 
     .deletebutton {
