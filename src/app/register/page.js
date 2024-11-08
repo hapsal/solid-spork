@@ -30,8 +30,9 @@ const RegisterSchema =  Yup.object({
 const RegisterPage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [formdata, setFormData] = useState('')
+    const [serverError, setServerError] = useState(null)
 
-    const HandleSubmit = async (formData, { setErrors, resetForm }) => {
+    const HandleSubmit = async (formData, { resetForm }) => {
         setIsLoading(true)
 
         try {
@@ -44,21 +45,22 @@ const RegisterPage = () => {
             })
 
             if (!response.ok) {
-                const errorData = await response.json();
+                const errorData = await response.json()
                 
                 if (errorData.errors) {
-                    setErrors(errorData.errors)
+                    setServerError(errorData.errors)
+                    //console.log(serverError)
                 } else {
-                    throw new Error(errorData.message || `HTTP error! status: ${response.status}`)
+                    setServerError(errorData.error || errorData.message || 'Something went wrong!')
                 }
 
-                return;
+                return
             }
-
             const data = await response.json()
             //console.log(data)
             setFormData(data)
             resetForm()
+            setServerError(null)
         } catch (error) {
             console.error('Error during submission:', error)
         } finally {
@@ -245,6 +247,10 @@ const RegisterPage = () => {
 
                                 ) : null}
 
+                                {serverError && serverError["mac"] && (
+                                    <div className={styles.error}>{serverError["mac"]}</div>
+                                )}
+
 
                                 <label>UUID:*</label>
                                 <Field type="text" name="uuid" placeholder="e.g. f81d4fae-7dec-11d0-a765-00a0c91e6bf6" 
@@ -257,6 +263,10 @@ const RegisterPage = () => {
 
                                 ) : null}
 
+                                {serverError && serverError["uuid"] && (
+                                    <div className={styles.error}>{serverError["uuid"]}</div>
+                                )}
+
                                 <label>Service ID:*</label>
                                 <Field type="text" name="serviceid" placeholder="e.g. 12A3B45" 
                                 className={errors.serviceid && touched.serviceid ? styles.inputerror : ''}
@@ -267,6 +277,10 @@ const RegisterPage = () => {
                                 <div className={styles.error}>{errors.serviceid}</div>
 
                                 ) : null}
+
+                                {serverError && serverError["serviceid"] && (
+                                    <div className={styles.error}>{serverError["serviceid"]}</div>
+                                )}
 
 
                                 <label>Date:</label>
@@ -338,6 +352,10 @@ const RegisterPage = () => {
                                  <div className={styles.error}>{errors.mac}</div>
  
                                  ) : null}
+
+                                {serverError && serverError["mac"] && (
+                                    <div className={styles.error}>{serverError["mac"]}</div>
+                                )}
 
                                 <label>Date:</label>
                                 <Field type="date" name="date" 

@@ -2,15 +2,19 @@ import { z } from 'zod'
 import { isMACAddress, isUUID } from 'validator'
 import { MongoClient, ObjectId } from 'mongodb'
 
+
 const schema = z.object({
     mac: z.string().refine(
         val => isMACAddress(val),
-        { message: 'Please enter a valid MAC address' }
+        { message: 'Please enter a valid MAC address e.g.: B2:99:F4:75:A1:82' }
     ),
-   /*  uuid: z.string().refine(
+
+    /* doesnt work exactly as it should
+     uuid: z.string().refine(
         val => isUUID(val),
-        { message: 'Please enter a valid UUID' }
-    ), */
+        { message: 'Please enter a valid UUID e.g.: f47ac10b-58cc-4372-a567-0e02b2c3d479' }
+    ),
+    */
 })
 
 async function connectToDatabase() {
@@ -81,7 +85,9 @@ async function generateLocalPassword() {
         counter += 1
     }
     return result
+
 }
+
 
 export async function POST(req, { params }) {
     const slug = params.slug
@@ -98,8 +104,48 @@ export async function POST(req, { params }) {
             try {
                 const deviceName = await generateDeviceName(collection)
 
-                const localPass = data.devicetype !== 'Printer' ? await generateLocalPassword() : null;
+                const localPass = data.devicetype !== 'Printer' ? await generateLocalPassword() : null
+
+                let existingDevice
+
+                if (data.devicetype !== 'Printer') {
+                    existingDevice = await collection.findOne({
+                        $or: [
+                            { mac: data.mac },
+                            { uuid: data.uuid },
+                            { serviceid: data.serviceid }
+                        ]
+                    })
+                } else {
+                    existingDevice = await collection.findOne({
+                        mac: data.mac
+                    })
+                }
+
+                if (existingDevice) {
+                    const errors = {}
                 
+                    if (existingDevice.mac === data.mac) {
+                        errors["mac"] = `MAC address is already registered`
+                    }
+                
+                    if (existingDevice.uuid === data.uuid) {
+                        errors["uuid"] = "UUID is already registered"
+                    }
+
+                    if (existingDevice.serviceid === data.serviceid) {
+                        errors["serviceid"] = "Service ID is already registered"
+                    }
+
+                
+                    if (Object.keys(errors).length > 0) {
+                        return new Response(JSON.stringify({ errors }), {
+                            status: 400,
+                            headers: { 'Content-Type': 'application/json' }
+                        })
+                    }
+                }
+
                 const rawRegisterData = {
                     deviceName: deviceName,
                     name: data.name,
